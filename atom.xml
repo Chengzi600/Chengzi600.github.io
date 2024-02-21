@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>橙BLOG</title>
+  
+  <subtitle>橙子的BLOG</subtitle>
+  <link href="http://chengzi600.github.io/atom.xml" rel="self"/>
+  
+  <link href="http://chengzi600.github.io/"/>
+  <updated>2024-02-21T06:58:44.536Z</updated>
+  <id>http://chengzi600.github.io/</id>
+  
+  <author>
+    <name>Chengzi600</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试页</title>
+    <link href="http://chengzi600.github.io/2024/02/21/hello-world/"/>
+    <id>http://chengzi600.github.io/2024/02/21/hello-world/</id>
+    <published>2024-02-21T06:15:32.000Z</published>
+    <updated>2024-02-21T06:58:44.536Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Start"><a href="#Start" class="headerlink" title="Start"></a>Start</h2><h3 id="Python-Code-Test"><a href="#Python-Code-Test" class="headerlink" title="Python Code Test"></a>Python Code Test</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/python</span></span><br><span class="line"><span class="comment"># -*- coding: UTF-8 -*-</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">for</span> letter <span class="keyword">in</span> <span class="string">&#x27;Python&#x27;</span>:     <span class="comment"># 第一个实例</span></span><br><span class="line">   <span class="keyword">if</span> letter == <span class="string">&#x27;h&#x27;</span>:</span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line">   <span class="built_in">print</span> <span class="string">&#x27;当前字母 :&#x27;</span>, letter</span><br><span class="line">  </span><br><span class="line">var = <span class="number">10</span>                    <span class="comment"># 第二个实例</span></span><br><span class="line"><span class="keyword">while</span> var &gt; <span class="number">0</span>:              </span><br><span class="line">   <span class="built_in">print</span> <span class="string">&#x27;当前变量值 :&#x27;</span>, var</span><br><span class="line">   var = var -<span class="number">1</span></span><br><span class="line">   <span class="keyword">if</span> var == <span class="number">5</span>:   <span class="comment"># 当变量 var 等于 5 时退出循环</span></span><br><span class="line">      <span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line"><span class="built_in">print</span> <span class="string">&quot;Good bye!&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;h2 id=&quot;Start&quot;&gt;&lt;a href=&quot;#Start&quot; class=&quot;headerlink&quot; title=&quot;Start&quot;&gt;&lt;/a&gt;Start&lt;/h2&gt;&lt;h3 id=&quot;Python-Code-Test&quot;&gt;&lt;a href=&quot;#Python-Code-Test&quot; class=&quot;</summary>
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
