@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="description" content="我如何从零搭建 Hexo Blog 并托管到 Github Pages"><meta name="keywords" content="hexo,教程"><meta name="author" content="Chengzi600,undefined"><meta name="copyright" content="Chengzi600"><title>我如何从零搭建 Hexo Blog 并托管到 Github Pages【橙BLOG】</title><link rel="stylesheet" href="/css/fan.css"><link rel="stylesheet" href="/css/thirdparty/jquery.mCustomScrollbar.min.css"><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><link rel="icon" href="/favicon.ico"><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- script(src=url_for("/js/mathjax/mathjax.js"))--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+    tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]}
+});
+</script><script>var isPassword = '' || false;
+if (isPassword) {
+    if (prompt('请输入文章密码') !== '') {
+        alert('密码错误！');
+        history.back();
+    }
+}</script><script>window.GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  gitment: {},
+  valine: {"appId":"P5NdUY4xpEaBXALMrfKHR8So-gzGzoHsz","appKey":"r7ajuhIBZAYmDgFY5oAAMuJD","placeholder":"Just send it - (邮箱和网址可不填)"},
+  twikoo: {},
+}</script><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="橙BLOG" type="application/atom+xml">
+</head><body><canvas id="universe"></canvas><!--#body--><div id="sidebar"><div class="toggle-sidebar-info button-hover"><span data-toggle="文章目录">站点概览</span></div><div class="sidebar-toc"><div class="sidebar-toc-title">目录</div><div class="sidebar-toc-progress"><span class="progress-notice">您已阅读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc-progress-bar"></div></div><div class="sidebar-toc-content" id="sidebar-toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-Hexo"><span class="toc-number">3.1.</span> <span class="toc-text">安装 Hexo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">3.2.</span> <span class="toc-text">配置信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E9%A2%98"><span class="toc-number">3.3.</span> <span class="toc-text">配置主题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0"><span class="toc-number">3.4.</span> <span class="toc-text">发布文章</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0-Github"><span class="toc-number">3.5.</span> <span class="toc-text">上传 Github</span></a></li></ol></li></ol></div></div><div class="author-info hide"><div class="author-info-avatar"><img class="author-info-avatar-img" src="/avatar.png"></div><div class="author-info-name">Chengzi600</div><div class="author-info-description">靠自己，实际一些！</div><div class="links-buttons"><a class="links-button button-hover" href="https://github.com/Chengzi600" target="_blank">GitHub<i class="icon-dot bg-color4"></i></a><a class="links-button button-hover" href="https://gitee.com/chengzi600" target="_blank">Gitee<i class="icon-dot bg-color5"></i></a><a class="links-button button-hover" href="tencent://message/?uin=27527185714&amp;Site=&amp;Menu=yes" target="_blank">QQ<i class="icon-dot bg-color6"></i></a><a class="links-button button-hover" href="mailto:m2752718571@gmail.com" target="_blank">E-Mail<i class="icon-dot bg-color2"></i></a></div><div class="author-info-articles"><a class="author-info-articles-archives article-meta" href="/archives"><span class="pull-top">日志</span><span class="pull-bottom">2</span></a><a class="author-info-articles-tags article-meta" href="/tags"><span class="pull-top">标签</span><span class="pull-bottom">3</span></a><a class="author-info-articles-categories article-meta" href="/categories"><span class="pull-top">分类</span><span class="pull-bottom">3</span></a></div></div></div><div id="main-container"><header><div id="menu-outer"><i class="menu-list-icon fas fa-bars"></i><nav id="menu-inner"><a class="menu-item" href="/">首页</a><a class="menu-item" href="/tags">标签</a><a class="menu-item" href="/categories">分类</a><a class="menu-item" href="/archives">归档</a></nav><div class="right-info"><a class="title-name" href="/">橙BLOG</a><span id="now-time"></span></div></div></header><div id="content-outer"><div id="content-inner"><article id="post"><div class="post-header"><div class="title">我如何从零搭建 Hexo Blog 并托管到 Github Pages</div><div class="container"><time class="button-hover post-date"><i class="fas fa-calendar-alt article-icon" aria-hidden="true"></i> 发表于 2024-02-22 | 更新于 2024-02-22</time><!--time.button-hover.post-date #[i.fas.fa-calendar-alt.article-icon(aria-hidden="true")] #[=__('post.modified')] #[=date(page['updated'], config.date_format)]--><div class="button-hover categories"><i class="fa fa-inbox article-icon" aria-hidden="true"></i><a class="link-a" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a><i class="fa fa-angle-right" style="margin: 0 8px;"></i><i class="fa fa-inbox article-icon" aria-hidden="true"></i><a class="link-a" href="/categories/%E7%BC%96%E7%A8%8B/Web/">Web</a></div><div class="button-hover tags"><i class="fa fa-tag article-icon" aria-hidden="true"></i><a class="link-a" href="/tags/hexo/">hexo</a><span>&nbsp;|&nbsp;</span><i class="fa fa-tag article-icon" aria-hidden="true"></i><a class="link-a" href="/tags/%E6%95%99%E7%A8%8B/">教程</a></div></div></div><div class="main-content"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前尝试过自己搭建动态的 BLOG，然而光是域名+服务器的费用就是一个不小的数字。所以这次采用了一个快速、简洁且高效的博客框架 <strong>hexo</strong>，以便于将其免费托管到 Github Pages</p>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><blockquote>
+<p>我的搭建环境：Windows 10, Node.js v18.19.0, npm v10.2.3</p>
+</blockquote>
+<ol>
+<li><p>Win 10 电脑建议下载一个终端，Win 11是自带的，如果不想装也可以用Git Bash，但不建议使用CMD或者PowerShell</p>
+</li>
+<li><p>安装 Node.js，安装完了之后在终端输入下面的命令，如果显示出来版本号就说明好了</p>
+</li>
+</ol>
+<span id="more"></span>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\15573&gt;node -v</span><br><span class="line">v18.19.0</span><br><span class="line"></span><br><span class="line">C:\Users\15573&gt;npm -v</span><br><span class="line">10.2.3</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li><p>安装 Git，用于后续推送 Github</p>
+</li>
+<li><p>一个 Github 账号</p>
+</li>
+</ol>
+<h2 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h2><h3 id="安装-Hexo"><a href="#安装-Hexo" class="headerlink" title="安装 Hexo"></a>安装 Hexo</h3><p>新建一个文件夹，右键打开终端（或点击Git Bash Here）</p>
+<p>为了防止下载速度过慢，一直卡在<code>timing xxx</code>，建议换国内源后再操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://registry.npm.taobao.org</span><br></pre></td></tr></table></figure>
+
+<p>依次输入下面的命令，<code>myblog</code>可以换成任意名称</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br><span class="line">hexo init myblog</span><br></pre></td></tr></table></figure>
+
+<p>耐心等待初始化，完成后会在你打开终端的目录下新建<code>myblog</code>文件夹和一个json文件，我们切换到文件夹，补全hexo所需的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> myblog</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>接下来生成静态文件，并启动hexo服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>根据提示访问<code>localhost:4000</code>就能看到你生成的博客了</p>
+<h3 id="配置信息"><a href="#配置信息" class="headerlink" title="配置信息"></a>配置信息</h3><p>让我们来熟悉一下几个重要的目录和文件</p>
+<ul>
+<li>node_modules: 存放依赖包以及你安装的插件</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：存放模板文件</li>
+<li>source：存放文章</li>
+<li><strong>themes：存放主题</strong></li>
+<li><strong>_config.yml: 博客的全局配置文件</strong></li>
+</ul>
+<p>进入<code>_config.yml</code>编辑<code>Site</code>这部分信息</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">橙BLOG</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;橙子的BLOG&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;靠自己，实际一些！&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Chengzi600</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果怕改坏可以先备份配置文件</p>
+<p>用<code>Ctrl+C</code>结束hexo进程，然后使用<code>hexo s</code>重启服务器</p>
+<p>进去看看，你会发现内容应用上去了，不过还有些内容我们需要配置主题的配置文件修改</p>
+<h3 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h3><p>点开<a target="_blank" rel="noopener" href="https://hexo.io/themes/">Themes | Hexo</a>这个链接，寻找你喜欢的主题，这里以<a target="_blank" rel="noopener" href="https://github.com/fan-lv/Fan">Fan</a>主题为例子，点进主题之后一般会进入Github对应的主题仓库，我们直接下滑看<code>README</code>文件，上面一般给出了操作方法，而且各个主题的设置方法也基本相同</p>
+<ol>
+<li>clone主题（记得<code>Ctrl+C</code>关掉hexo进程）</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/fan-lv/Fan.git themes/Fan</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>修改位于博客根目录下的 <code>_config.yml</code> 内的 <code>theme</code> 选项值为 <code>Fan</code>（在尾部的位置，找不到可以<code>Ctrl+F</code>搜索）</p>
+</li>
+<li><p>进入<code>.\themes\Fan</code>文件夹，这里有一个<code>_config.yml</code>文件，是主题的配置文件，我们需要在这里完成大部分配置，作者贴心地给出了注释，我们只需要按照需求将对应功能的<code>enable</code>设置为<code>true</code>或者<code>false</code>，对应个人信息参数按需求修改即可。这一步不同主题配置项有很大区别，我不多加以说明，如果有疑问可以自己查询文档，部分功能如评论可能需要去配置<code>LeanCloud</code>，建议到对应的<a target="_blank" rel="noopener" href="https://valine.js.org/">Valine</a>项目仓库查看文档。希望大家能够自行完成，培养解决问题的能力</p>
+</li>
+</ol>
+<h3 id="发布文章"><a href="#发布文章" class="headerlink" title="发布文章"></a>发布文章</h3><p>由于是静态博客，文章编辑稍微复杂，推荐使用下载<code>admin</code>插件编辑</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-admin --save</span><br></pre></td></tr></table></figure>
+
+<p>因为这个插件无法跟着上传到Github上，所以无需设置密码什么的，访问<code>localhost:4000/admin</code>即可进入管理后台，界面是英语的，但是简单熟悉后便可掌握，文章的编辑、删除等操作都可以很轻易的完成，在编辑页面右上角的锯齿图标可以设置标签和分类，其他功能可自行探索，不多赘述</p>
+<p>编辑完成后点击<code>publish</code>发布，重新生成静态文件后即可看到文章</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<h3 id="上传-Github"><a href="#上传-Github" class="headerlink" title="上传 Github"></a>上传 Github</h3><ol>
+<li><p>登录Github，新建一个仓库，注意仓库名要为<code>用户名.github.io</code>，比如我的Github ID是Chengzi600，那么仓库名为<code>Chengzi600.github.io</code></p>
+</li>
+<li><p>在全局配置文件中配置以下内容，repo这里改成你自己仓库的git文件</p>
+</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repo: https://github.com/Chengzi600/Chengzi600.github.io.git</span><br><span class="line">  branch: main</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>安装必要的依赖，来更加方便地部署</li>
+</ol>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>生成静态文件后推送，期间会弹窗让你登录，按照提示授权即可</li>
+</ol>
+<p>  如果失败了，可能是Github连接问题，建议使用梯子</p>
+<p>  另外还可以配置 SSH 密钥来替代弹窗登录，这里不做说明，可以自行查询</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo c</span><br><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>过一会儿输入你的仓库名字访问，就能发现成功上传，后续如果在本地发了新文章或做别的修改，直接重复上面的代码<code>hexo c hexo g hexo d</code>即可推送到 Github</li>
+</ol>
+<p>Hexo 更多进阶功能，以后有空再更</p>
+<p>如果你是纯萌新，没一点编程基础的，能做到这步真的很不容易了</p>
+</div><div class="post-copyright valine" id="comments-container"><script src="//unpkg.com/valine@1.4.14/dist/Valine.min.js"></script><script>let arr = location.href.split('/#more')[0].split('/');
+let title = arr[arr.length - 1];
+if (title === '') {
+    title = arr[arr.length - 2];
+}
+var flag = false;
+var gitFun = function () {
+    try {
+        var valineObj = window.GLOBAL_CONFIG.valine;
+        new Valine({
+            el: "#comments-container",
+            ...valineObj
+        });
+        flag = true;
+    } catch (e) {
+        flag = false;
+    }
+}
+var setIn = setInterval(() => {
+    if (!flag) {
+        gitFun();
+    } else {
+        clearInterval(setIn);
+    }
+}, 200);</script></div></article><div id="pagination"><div class="prev-post pull-left"><span class="line line-top"></span><span class="line line-right"></span><span class="line line-bottom"></span><span class="line line-left"></span><a href="/2024/02/22/%E7%BD%91%E7%AB%99%E7%AE%80%E4%BB%8B/"><i class="fas fa-angle-left">&nbsp;</i><span>网站简介</span></a></div></div><!--div!= paginator()--></div></div><div class="button-hover" id="return-top"><i class="fas fa-arrow-up" aria-hidden="true"></i></div><footer><div id="footer"><div class="button-hover" id="side-button"><i class="fas fa-arrow-right"></i></div><div class="right-content"><div class="busuanzi"><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_page_pv"><i class="fas fa-file-o"></i></span><span id="busuanzi_value_page_pv"></span><span></span></div><div class="copyright">&copy;2020 ～ 2024 By Chengzi600</div></div></div></footer></div><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery-3.3.1.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/velocity.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/thirdparty/jquery.mCustomScrollbar.concat.min.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/fan.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/canvas_bg.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/utils.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/scroll.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/sidebar.js"></script><!--script(src=url)--><!--js(src=url_for(url) + '?version=' + version())--><script src="/js/copy.js"></script><!--script(src=url)--></body></html>
