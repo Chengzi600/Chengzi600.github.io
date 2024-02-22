@@ -38,13 +38,6 @@
 
   
   <url>
-    <loc>http://chengzi600.github.io/tags/%E4%B8%AA%E4%BA%BA/</loc>
-    <lastmod>2024-02-22</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://chengzi600.github.io/tags/hexo/</loc>
     <lastmod>2024-02-22</lastmod>
     <changefreq>weekly</changefreq>
@@ -58,17 +51,24 @@
     <priority>0.2</priority>
   </url>
   
+  <url>
+    <loc>http://chengzi600.github.io/tags/%E4%B8%AA%E4%BA%BA/</loc>
+    <lastmod>2024-02-22</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
   
   <url>
-    <loc>http://chengzi600.github.io/categories/%E5%85%AC%E5%91%8A/</loc>
+    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
     <lastmod>2024-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/</loc>
+    <loc>http://chengzi600.github.io/categories/%E5%85%AC%E5%91%8A/</loc>
     <lastmod>2024-02-22</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
