@@ -2,7 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://chengzi600.github.io/2024/02/22/%E7%BD%91%E7%AB%99%E7%AE%80%E4%BB%8B/</loc>
+    <loc>http://chengzi600.github.io/9999/09/09/%E7%BD%91%E7%AB%99%E7%AE%80%E4%BB%8B/</loc>
+    
+    <lastmod>2024-02-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://chengzi600.github.io/2024/02/22/%E8%8B%B1%E8%AF%AD%E5%86%99%E4%BD%9C-Spring-Festival/</loc>
     
     <lastmod>2024-02-23</lastmod>
     
@@ -14,15 +23,6 @@
     <loc>http://chengzi600.github.io/about/index.html</loc>
     
     <lastmod>2024-02-23</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://chengzi600.github.io/2024/02/22/%E8%8B%B1%E8%AF%AD%E5%86%99%E4%BD%9C-Spring-Festival/</loc>
-    
-    <lastmod>2024-02-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -107,14 +107,14 @@
   </url>
   
   <url>
-    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/Web/</loc>
+    <loc>http://chengzi600.github.io/categories/%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2024-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://chengzi600.github.io/categories/%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/Web/</loc>
     <lastmod>2024-02-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
