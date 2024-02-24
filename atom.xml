@@ -41,6 +41,30 @@
   </entry>
   
   <entry>
+    <title>逆向 Godot 引擎开发的游戏的一般方法 - 恶魔轮盘赌的拆包</title>
+    <link href="http://chengzi600.github.io/2024/02/24/%E9%80%86%E5%90%91-Godot-%E5%BC%95%E6%93%8E%E5%BC%80%E5%8F%91%E7%9A%84%E6%B8%B8%E6%88%8F%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95-%E6%81%B6%E9%AD%94%E8%BD%AE%E7%9B%98%E8%B5%8C%E7%9A%84%E6%8B%86%E5%8C%85/"/>
+    <id>http://chengzi600.github.io/2024/02/24/%E9%80%86%E5%90%91-Godot-%E5%BC%95%E6%93%8E%E5%BC%80%E5%8F%91%E7%9A%84%E6%B8%B8%E6%88%8F%E7%9A%84%E4%B8%80%E8%88%AC%E6%96%B9%E6%B3%95-%E6%81%B6%E9%AD%94%E8%BD%AE%E7%9B%98%E8%B5%8C%E7%9A%84%E6%8B%86%E5%8C%85/</id>
+    <published>2024-02-24T11:30:00.000Z</published>
+    <updated>2024-02-24T11:32:20.075Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>近期网络上也是出现了一款特别火的游戏——<strong>Buckshot Roulette</strong>，也叫恶魔轮盘赌，游戏玩法不多赘述，这里提供 Godot 引擎游戏逆向的一般方法，至于游戏中AI大哥的逻辑，B站上已经有了分析<a href="https://www.bilibili.com/video/BV13z421R73V"># 逆向代码解析恶魔轮盘赌！你想知道的全在这里</a></p><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p>游戏是 <strong>Godot</strong> 引擎开发的，Godot 是一个开源引擎，这意味着我们可以很容易地将其反编译，得到项目文件，以此来获得你想要的音频&#x2F;图片资源，甚至对代码进行二次开发</p><span id="more"></span><p>这里我们用到 Github 上一个开源项目 [<a href="https://github.com/bruvzg/gdsdecomp">GitHub - bruvzg&#x2F;gdsdecomp: Godot reverse engineering tools</a>，该程序支持反编译 Godot 4.x、3.x 和 2.x 项目</p><ol><li><p>在 Github 下载最新的 Release，解压</p></li><li><p><code>Buckshot Roulette.exe</code>游戏文件，1.0或1.1版本均可</p></li></ol><h2 id="逆向过程"><a href="#逆向过程" class="headerlink" title="逆向过程"></a>逆向过程</h2><h3 id="获得项目文件"><a href="#获得项目文件" class="headerlink" title="获得项目文件"></a>获得项目文件</h3><ol><li><p>启动<code>gdre_tools.exe</code>，选择<code>RE Tools</code>-<code>Recover Project</code>，在文件选择框中选择下载好的游戏主程序文件<code>Buckshot Roulette.exe</code>，选择输出文件夹并选择<code>Full Project Recovery</code>获得完整项目文件，等待几分钟时间，程序会把整个项目文件提到你选择的文件夹中，期间程序自带的控制台可能报错，不用理会即可</p></li><li><p>完成之后，点开项目文件夹，我们为了在 Godot 中打开项目，需要先看项目版本，用任意编辑器打开<code>project.godot</code>文件</p><pre class="language-godot" data-language="godot"><code class="language-godot">[application]config&#x2F;name&#x3D;&quot;Buckshot Roulette&quot;run&#x2F;main_scene&#x3D;&quot;res:&#x2F;&#x2F;scenes&#x2F;menu.tscn&quot;config&#x2F;features&#x3D;PackedStringArray(&quot;4.2&quot;, &quot;Forward Plus&quot;)boot_splash&#x2F;bg_color&#x3D;Color(0, 0, 0, 1)boot_splash&#x2F;show_image&#x3D;falseconfig&#x2F;icon&#x3D;&quot;res:&#x2F;&#x2F;misc&#x2F;icon1.png&quot;</code></pre><p>从中不难发现，项目所用的 Godot 版本为<code>4.2</code>，我们到 Godot 官网下载对应的版本，添加项目，选中<code>project.godot</code>文件即可加载</p></li></ol><h3 id="提取资源"><a href="#提取资源" class="headerlink" title="提取资源"></a>提取资源</h3><p>由于大部分人不会 Godot 开发，只是想要获得游戏中的资源，这里简单说明一下资源的提取</p><p>先来观察下目录结构</p><pre class="language-bash" data-language="bash"><code class="language-bash">├─.assets├─.godot├─.idea├─audio├─fonts├─GodotRetro├─instances├─main player├─materials├─misc├─models├─scenes├─scripts└─textures</code></pre><p>目录结构取决于开发者的习惯，但是大多情况下，一些文件夹的命名和文件的存放原则是一致的，这里说明几个重要文件夹</p><ul><li><p><code>audio</code>存储游戏的音频文件，游戏的音乐、音效都在这里</p></li><li><p><code>fonts</code>存储游戏的字体，该游戏中字体全部是特制的，如有需求可以直接安装<code>.ttf</code>文件（这游戏几套字体都只支持英文字母）</p></li><li><p><code>models</code> <code>textures</code>存储游戏的贴图，能从里面找到很多道具的贴图</p></li><li><p><code>scripts</code>存储游戏中全部代码文件，Godot 开发使用  <em>GDScript</em> 脚本语言，由于 Godot 引擎的特殊性，解包出来的代码中变量名和方法名没有任何变化，甚至注释都完整保留，具有极强的可读性</p><p>我们可以从代码中看出作者对引擎功能的不满以及恶趣味，遗憾的是计算奖金的这个彩蛋没有保留下来</p><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># HealthCounter.gd</span><span class="token comment"># Why can I not add functions with arguments into godot animator :sob:</span></code></pre><pre class="language-python" data-language="python"><code class="language-python"><span class="token comment"># EndingManager.gd</span><span class="token keyword">if</span> <span class="token punctuation">(</span>endless_overwriting<span class="token punctuation">)</span><span class="token punctuation">:</span> total_cash <span class="token operator">=</span> endless_score<span class="token comment"># if (playername == "sex"): total_cash = 69</span><span class="token comment"># if (playername == "leet"): total_cash = 1337</span><span class="token comment"># if (playername == "snoop" or playername == "weed" or playername == "kush"): total_cash = 420</span></code></pre></li></ul><p>特殊说明，<code>.import</code>文件是 Godot 引擎的导入记录，与资源内容无关，可以直接无视</p><p>根据目录的结构，我们可以针对性浏览文件，从而轻易地找到自己想要的东西 </p><h2 id="尾声"><a href="#尾声" class="headerlink" title="尾声"></a>尾声</h2><p>由于我并不熟悉 Godot 的开发，文章中的介绍可能有所欠缺，有错误还麻烦在底下评论指正，而且我的设备太烂，Godot 引擎都跑不起来…</p><p>由此可见，Godot 的逆向非常容易，也非常容易被人拿来干坏事，<strong>开源是把双刃剑</strong>，我们都应该合理地运用它</p>]]></content>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;近期网络上也是出现了一款特别火的游戏——&lt;strong&gt;Buckshot Roulette&lt;/strong&gt;，也叫恶魔轮盘赌，游戏玩法不多赘述，这里提供 Godot 引擎游戏逆向的一般方法，至于游戏中AI大哥的逻辑，B站上已经有了分析&lt;a href=&quot;https://www.bilibili.com/video/BV13z421R73V&quot;&gt;# 逆向代码解析恶魔轮盘赌！你想知道的全在这里&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;准备工作&quot;&gt;&lt;a href=&quot;#准备工作&quot; class=&quot;headerlink&quot; title=&quot;准备工作&quot;&gt;&lt;/a&gt;准备工作&lt;/h2&gt;&lt;p&gt;游戏是 &lt;strong&gt;Godot&lt;/strong&gt; 引擎开发的，Godot 是一个开源引擎，这意味着我们可以很容易地将其反编译，得到项目文件，以此来获得你想要的音频&amp;#x2F;图片资源，甚至对代码进行二次开发&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="编程" scheme="http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    <category term="逆向" scheme="http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/%E9%80%86%E5%90%91/"/>
+    
+    
+    <category term="游戏" scheme="http://chengzi600.github.io/tags/%E6%B8%B8%E6%88%8F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>英语写作 - Spring Festival</title>
     <link href="http://chengzi600.github.io/2024/02/22/%E8%8B%B1%E8%AF%AD%E5%86%99%E4%BD%9C-Spring-Festival/"/>
     <id>http://chengzi600.github.io/2024/02/22/%E8%8B%B1%E8%AF%AD%E5%86%99%E4%BD%9C-Spring-Festival/</id>
