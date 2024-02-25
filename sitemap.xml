@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://chengzi600.github.io/posts/28599.html</loc>
+    
+    <lastmod>2024-02-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://chengzi600.github.io/posts/38835.html</loc>
     
     <lastmod>2024-02-25</lastmod>
@@ -79,6 +88,13 @@
   </url>
   
   <url>
+    <loc>http://chengzi600.github.io/tags/%E5%8A%A0%E5%AF%86/</loc>
+    <lastmod>2024-02-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://chengzi600.github.io/tags/%E4%B8%AA%E4%BA%BA/</loc>
     <lastmod>2024-02-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -116,6 +132,13 @@
   </url>
   
   <url>
+    <loc>http://chengzi600.github.io/categories/%E6%9D%82%E9%A1%B9/</loc>
+    <lastmod>2024-02-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://chengzi600.github.io/categories/%E5%85%AC%E5%91%8A/</loc>
     <lastmod>2024-02-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -130,14 +153,14 @@
   </url>
   
   <url>
-    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/%E9%80%86%E5%90%91/</loc>
+    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/Web/</loc>
     <lastmod>2024-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/Web/</loc>
+    <loc>http://chengzi600.github.io/categories/%E7%BC%96%E7%A8%8B/%E9%80%86%E5%90%91/</loc>
     <lastmod>2024-02-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
