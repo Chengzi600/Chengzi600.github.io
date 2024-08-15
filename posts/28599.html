@@ -58,7 +58,7 @@ IconifyProviders = {
     </div>
   </div>
 </div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></div></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/28473.html" rel="prev" title="我如何从零搭建 Hexo Blog 并托管到 Github Pages"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">我如何从零搭建 Hexo Blog 并托管到 Github Pages</span></a></div><div class="post-nav-item"></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>下面是评论区捏</span><br></div><div id="tcomment"></div><script type="module">import { getScript } from '/js/utils.js'
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css"></div></section></article><div class="post-nav"><div class="post-nav-item"><a class="post-nav-prev" href="/posts/28473.html" rel="prev" title="我如何从零搭建 Hexo Blog 并托管到 Github Pages"><span class="icon iconify" data-icon="ri:arrow-left-s-line"></span><span class="post-nav-text">我如何从零搭建 Hexo Blog 并托管到 Github Pages</span></a></div><div class="post-nav-item"></div></div></div><div class="hty-card" id="comment"><div class="comment-tooltip text-center"><span>评论区</span><br></div><div id="tcomment"></div><script type="module">import { getScript } from '/js/utils.js'
 
 getScript("https://fastly.jsdelivr.net/npm/twikoo@latest/dist/twikoo.all.min.js", () => {
   const twikooConfig = {"enable":true,"envId":"https://chengzi600-twikoo.hf.space"}
@@ -79,4 +79,12 @@ getScript("https://fastly.jsdelivr.net/npm/twikoo@latest/dist/twikoo.all.min.js"
   display_live_time.innerHTML = ` ${passDay} Days ${passHour} Hours ${passMinute} Minutes ${passSecond} Seconds`;
 }
 blog_live_time();
-</script></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="Total Visitors"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="Total Views"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a></body></html>
+</script></div><div id="busuanzi"><span id="busuanzi_container_site_uv" title="Total Visitors"><span><span class="icon iconify" data-icon="ri:user-line"></span></span><span id="busuanzi_value_site_uv"></span></span><span class="footer-separator">|</span><span id="busuanzi_container_site_pv" title="Total Views"><span><span class="icon iconify" data-icon="ri:eye-line"></span></span><span id="busuanzi_value_site_pv"></span></span><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></footer></div><a class="hty-icon-button" id="back-to-top" aria-label="back-to-top" href="#"><span class="icon iconify" data-icon="ri:arrow-up-s-line"></span><svg class="progress-circle-container" viewBox="0 0 100 100"><circle class="progress-circle" id="progressCircle" cx="50" cy="50" r="48" fill="none" stroke="#0078E7" stroke-width="2" stroke-linecap="round"></circle></svg></a><script>function initMourn() {
+  const date = new Date();
+  const today = (date.getMonth() + 1) + "-" + date.getDate()
+  const mourn_days = ["12-13"]
+  if (mourn_days.includes(today)) {
+    document.documentElement.style.filter = "grayscale(1)";
+  }
+}
+initMourn();</script></body></html>
