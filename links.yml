@@ -1,0 +1,37 @@
+- url: https://5ime.cn/
+  avatar: https://blog-1252493876.file.myqcloud.com/avatar.jpg
+  name: I Am I
+  blog: Hi, I Am I
+  desc: Hello,world. l'm coming.
+  color: "#90A6BC"
+  email: me@5ime.cn
+
+- url: https://www.yunyoujun.cn
+  avatar: https://www.yunyoujun.cn/images/avatar.jpg
+  name: 云游君
+  blog: 云游君的小站
+  desc: 希望能成为一个有趣的人。
+  email: me@yunyoujun.cn
+  color: "#0078e7"
+
+- url: "https://www.xscnet.cn/"
+  avatar: "https://www.xscnet.cn/avatar1.jpg"
+  name: "Mete0r's Blog | 壹人小站"
+  blog: "Mete0r's Blog | 壹人小站"
+  desc: "Trust the process."
+  color: "#FFC0CB"
+
+- url: https://miraii.cn/
+  name: MuXiaoChen🍊
+  blog: MuXiaoChen🍊
+  avatar: https://tuchuang.voooe.cn/images/2025/04/11/20250400.webp
+  desc: 柴米油盐酱醋茶，般般都在别人家
+
+- url: https://justpureh2o.cn
+  avatar: https://img.justpureh2o.cn/image/667f85b1d9c307b7e9ef9f2c.jpg
+  color: "#0080C0"
+  email: justpureh2o@outlook.com
+  desc: 穷方圆平直之情，尽规矩准绳之用。
+  name: JustPureH2O 的博客
+  blog: JustPureH2O 的博客
+

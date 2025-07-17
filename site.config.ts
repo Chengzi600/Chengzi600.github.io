@@ -5,7 +5,7 @@ export default defineSiteConfig({
   favicon: "/yun.svg",
   lang: 'zh-CN',
   title: '橙の小站',
-  subtitle: '一个孤独的小窝...',
+  subtitle: 'An infinite universe...',
   author: {
     name: 'Chengzi600',
     avatar: 'https://thirdqq.qlogo.cn/g?b=sdk&nk=2752718571&s=640',
@@ -22,10 +22,16 @@ export default defineSiteConfig({
       color: 'orange',
     },
     {
-      name: 'QQ 群',
-      link: '',
+      name: 'QQ',
+      link: 'https://qm.qq.com/q/2xQ040ssFK',
       icon: 'i-ri-qq-line',
       color: '#12B7F5',
+    },
+    {
+      name: 'QQ 群',
+      link: 'https://qm.qq.com/cgi-bin/qm/qr?k=JZCUQmZXUfkkOZI26nmGd5euc45NUIxQ&jump_from=webapi&authKey=OscGZ0B3mzzLeiow0PCxk2ItKVKRwLMrWiWSGGhEcy7w0JjBrUrNu4D+wvcq5IhA',
+      icon: 'i-ri-qq-line',
+      color: '#23c21eff',
     },
     {
       name: 'GitHub',
@@ -73,9 +79,6 @@ export default defineSiteConfig({
   statistics: {
       enable: true,
       readTime: {
-        /**
-         * 阅读速度
-         */
         speed: {
           cn: 300,
           en: 200,
@@ -89,19 +92,19 @@ export default defineSiteConfig({
     methods: [
       {
         name: '支付宝',
-        url: 'https://cdn.yunyoujun.cn/img/donate/alipay-qrcode.jpg',
+        url: '',
         color: '#00A3EE',
         icon: 'i-ri-alipay-line',
       },
       {
         name: 'QQ 支付',
-        url: 'https://cdn.yunyoujun.cn/img/donate/qqpay-qrcode.png',
+        url: '',
         color: '#12B7F5',
         icon: 'i-ri-qq-line',
       },
       {
         name: '微信支付',
-        url: 'https://cdn.yunyoujun.cn/img/donate/wechatpay-qrcode.jpg',
+        url: '',
         color: '#2DC100',
         icon: 'i-ri-wechat-pay-line',
       },

@@ -1,6 +1,8 @@
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
 import { addonTwikoo } from 'valaxy-addon-twikoo'
+import { addonComponents } from 'valaxy-addon-components'
+// import { addonVercount } from 'valaxy-addon-vercount'
 
 // add icons what you will need
 const safelist = [
@@ -21,13 +23,26 @@ export default defineValaxyConfig<UserThemeConfig>({
       title: '橙の小站',
     },
 
-    pages: [
+    nav:[
       {
-        name: '友链',
-        url: '/links/',
-        icon: 'i-ri-open-arm-line',
-        color: 'dodgerblue',
+        text: '分类',
+        link: '/categories/',
+        icon: 'i-ri-apps-line',
       },
+      {
+        text: '标签',
+        link: '/tags/',
+        icon: 'i-ri-bookmark-3-line',
+      },
+      {
+        text: '友链',
+        link: '/links/',
+        icon: 'i-ri-open-arm-line',
+      },
+    ],
+    
+
+    pages: [
       {
         name: '分类',
         url: '/categories/',
@@ -39,6 +54,12 @@ export default defineValaxyConfig<UserThemeConfig>({
         url: '/tags/',
         icon: 'i-ri-bookmark-3-line',
         color: 'dodgerblue',
+      },
+      {
+        name: '友链',
+        url: '/links/',
+        icon: 'i-ri-open-arm-line',
+        color: 'hotpink',
       },
       {
         name: '感情',
@@ -56,11 +77,14 @@ export default defineValaxyConfig<UserThemeConfig>({
       },
     },
   },
-  addons: [
-    addonTwikoo({
+    addons: [
+      addonTwikoo({
       envId: 'https://cheng-twikoo.netlify.app/.netlify/functions/twikoo',
-    })
-  ],
+    }),
+      addonComponents(),
+    ],
+
+    
 
   unocss: { safelist },
 })

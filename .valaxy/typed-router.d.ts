@@ -34,6 +34,7 @@ declare module 'vue-router/auto-routes' {
     '/posts/english-writing-spring': RouteRecordInfo<'/posts/english-writing-spring', '/posts/english-writing-spring', Record<never, never>, Record<never, never>>,
     '/posts/godot': RouteRecordInfo<'/posts/godot', '/posts/godot', Record<never, never>, Record<never, never>>,
     '/posts/hexo': RouteRecordInfo<'/posts/hexo', '/posts/hexo', Record<never, never>, Record<never, never>>,
+    '/posts/move-to-valaxy': RouteRecordInfo<'/posts/move-to-valaxy', '/posts/move-to-valaxy', Record<never, never>, Record<never, never>>,
     '/posts/test': RouteRecordInfo<'/posts/test', '/posts/test', Record<never, never>, Record<never, never>>,
     '/tags/': RouteRecordInfo<'/tags/', '/tags', Record<never, never>, Record<never, never>>,
   }
