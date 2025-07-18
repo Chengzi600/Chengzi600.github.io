@@ -13,7 +13,7 @@ export default defineSiteConfig({
       emoji: '💛'
     },
   },
-  description: '想要成为一个有趣的人ヾ(^∀^)ﾉ',
+  description: '靠自己，实际一些ヾ(^∀^)ﾉ',
   social: [
     {
       name: 'RSS',

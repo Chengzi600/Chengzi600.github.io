@@ -11,13 +11,19 @@ date: 2025-07-17 21:00:00
 updated: 2025-07-17 21:00:00
 ---
 
+::: tip
+
+这篇教程同样适合初次建立 Valaxy 博客的朋友。只需跳过有关迁移的步骤即可。安装、配置、上传 Github 等操作都是一致的。
+
+:::
+
 ## 我为什么要迁移
 
 在过去的一年里，我的博客一直采用 [Hexo 博客框架](https://hexo.io/) + [hexo-theme-yun 主题](https://github.com/YunYouJun/hexo-theme-yun) + [Twikoo 评论系统](https://twikoo.js.org/) 的架构。我对这个博客最满意的地方就是它的主题，然而，该主题的作者 yunyoujun 着手开发于新的博客框架——基于 Vue 的 Valaxy，因而停止了对 hexo 主题 yun 的维护。主题便是促使我迁移的一大因素。  
 
 此外，当时建博客时比较匆忙，很多系统如 RSS、搜索都没有来得及完善。后来我忙于备战中考，博客也被我暂时搁置了。今年年初寒假也有迁移的想法，但害怕框架还不成熟，就放弃了。现在借此机会，决定将博客整个迁移到 Valaxy。 
 
-如果你对插件生态依赖不大，并且觉得 Valaxy 的一些特性（见[文档](https://valaxy.site/)）是你的刚需，那么可以考虑进行迁移。这篇教程同样适合初次建立 Valaxy 博客的朋友。
+如果你对插件生态依赖不大，并且觉得 Valaxy 的一些特性（见[文档](https://valaxy.site/)）是你的刚需，那么可以考虑进行迁移。
 
 <!-- more -->
 
@@ -66,6 +72,8 @@ nvm use 22.12.0
 
 4. 必须安装 [VS Code](https://code.visualstudio.com/) ，后续配置过程需要用的基于它的 Valaxy 扩展。VS Code 功能十分强大，下面的工作大部分都可在其中完成。比如，我现在正依靠它撰写这篇教程。
 
+5. 安装[ Git ](https://git-scm.com/)版本控制软件，为推送 Github 做准备。
+
 ## 部署 Valaxy
 1. 选择一个合适的目录，打开终端。输入下面的命令，期间按照提示操作，使用上下方向键切换选项。注意`Select Type`选择`Blog`，`Choose the agent`选择`pnpm`，其它按需填写或选择。之后便会进入漫长的下载过程。
 ```bash
@@ -80,7 +88,11 @@ pnpm create valaxy
 
 
 ## 配置 Valaxy
-> 这一部分内容比较复杂，可能出现一些问题，我遇见所有的问题会放置在后面的**常见问题**，如有需要可以跳跃查看。如果没有对应的解决方案，请尽可能通过日志、F12 控制台的错误信息判断原因。如果问题难以排除，可以在下面评论或前往项目的 Github Discussion 求助。
+::: tip
+
+这一部分内容比较复杂，可能出现一些问题，我遇见所有的问题会放置在后面的**常见问题**，如有需要可以跳跃查看。如果没有对应的解决方案，请尽可能通过日志、F12 控制台的错误信息判断原因。如果问题难以排除，可以在下面评论或前往项目的 Github Discussion 求助。
+
+:::
 
 ### 文章
 首先，根据文档，完成初步文章的转移：  
@@ -109,9 +121,7 @@ Valaxy 目录层级比较复杂，但你需要触及的，无非就是下面这�
 
 在 VS Code 中，编辑上述的两个配置文件，将鼠标悬浮在配置项上，能够看到对应配置的注释。配置项不会全部列出在默认配置文件中，如果不想对照文档一一添加配置项，可以先照抄我的配置文件，再进行修改：
 
-```ts
-// valaxy.config.ts
-
+```ts [valaxy.config.ts]
 import type { UserThemeConfig } from 'valaxy-theme-yun'
 import { defineValaxyConfig } from 'valaxy'
 import { addonTwikoo } from 'valaxy-addon-twikoo'
@@ -206,8 +216,7 @@ export default defineValaxyConfig<UserThemeConfig>({
 
 ```
 
-```ts
-// site.config.ts
+```ts [site.config.ts]
 import { defineSiteConfig } from 'valaxy'
 
 export default defineSiteConfig({
@@ -354,7 +363,8 @@ export default defineSiteConfig({
 ```bash
 npm i valaxy-addon-twikoo
 ```
-2. 参照下面内容，修改配置文件，开启评论系统，如果你使用了上文我给你的配置文件，那么已经配置好了，只需要在预留给你的位置输入环境 ID即可完成安装。
+2. 参照下面内容，修改配置文件，开启评论系统。  
+如果你使用了上文我给你的配置文件，那么插件已经启用，只需要在预留给你的位置输入环境 ID 即可完成安装。
 ```ts
 // valaxy.config.ts & site.config.ts
 import { defineValaxyConfig } from 'valaxy'
@@ -376,11 +386,167 @@ export default defineValaxyConfig({
 })
 ```
 
-3. 控制台按`R`，进入文章，查看评论部署情况
+3. 控制台按`R`，进入文章，查看评论系统是否工作正常。尝试登录管理面板、并发送一条评论测试。
 
+#### 迁移评论信息
+
+Valaxy 采用`posts`下的文件名作为文章链接，与 Hexo 用发布日期文件夹作为链接存在差异。迁移后导致先前链接 404 的问题，可在配置文件中设置重定向。（已在上文配置文件中提供示例） 
+
+但是来自评论系统不会遵循你的重定向规则，因此需要手动把评论迁移到新页面。
+
+1. 打开 Twikoo 管理面板，点击导出，将评论信息导出为 JSON 文件
+2. 使用编辑器打开 JSON 文件，大概格式像这样：
+```json [twikoo-comment.json]
+[
+  {
+    "_id": "xxx",
+    "uid": "xxx",
+    "nick": "Chengzi600",
+    "mail": "2752718571@qq.com",
+    "mailMd5": "a9f4c9ce38ea31cc308f146883cee8ce104c4c9f67163663aa85e5bbde359d75",
+    "link": "12e",
+    "ua": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36 Edg/138.0.0.0",
+    "ip": "",
+    "master": false,
+    "url": "/posts/38835.html", // [!code warning]
+    "href": "http://localhost:4000/posts/38835.html", // [!code warning]
+    "comment": "<p>测试</p>\n",
+    "pid": null,
+    "rid": null,
+    "isSpam": false,
+    "created": 1752578621427,
+    "updated": 1752578621427
+  },
+  // ...
+]
+```
+3. 使用查找替换功能，将原来的url后面文章链接的部分更新。 
+如将`/posts/38835.html`替换`/posts/godot`
+
+::: tip
+
+针对文章较多的博客，该方法可能比较复杂。可以完成重定向配置后，写脚本解决问题。如果先前文章链接不带`.html`，可以尝试按照原来目录格式新建文件夹，并放置文章。
+
+:::
+
+4. 确保所有评论的地址都替换为新的之后，保存文件。回到管理面板，点击导入。源系统选择`Twikoo(JSON)`，再选中修改好的文件，确认操作。刷新页面，即可发现之前的评论都迁移过来了。
+
+::: warning
+
+回复可能需要更新对应数据中的父评论信息，也可以手动补档
+
+:::
+
+## 上传到 Github Pages
+
+> https://valaxy.site/guide/deploy
+
+与 Hexo 本地部署后再推送不同，Valaxy 采用更便捷的云端（Github Action）部署。在开始之前，可先本地部署，看看有没有报错。
+```bash
+# 执行 build 命令构建，dist 文件夹为构建后的内容
+pnpm run build
+```
+
+### 清空先前仓库
+
+Github Pages 要求以`[用户名].github.io`为仓库名。如果之前已经部署过，需要先清空仓库。如果你还没推送过 Github，可按要求创建一个空的`Public`仓库，然后略过这一过程。
+
+> 按文档完成仓库配置  
+>
+> - 选择 Github Repo，打开 **Settings-> Action -> General -> Workflow permissions，选择 read and write permissions**。
+
+1. 本地创建空文件夹，运行下面代码，拉取仓库。如果初次使用，按报错中的要求设定用户名、E-Mail。请把代码中的地址改为自己的仓库。
+
+```bash
+git pull https://github.com/Chengzi600/Chengzi600.github.io.git
+```
+
+2. 删除拉取的所有文件，并执行：
+
+```bash
+git add -u
+git commit -m "chore: clean-up"
+
+git remote add origin https://github.com/Chengzi600/Chengzi600.github.io.git
+git push origin main
+```
+::: warning
+
+如果提示登录，请积极配合。如果遇到网络问题，请使用代理工具，并进行设置（Clash 为例）：
+```bash
+# 设置HTTP/HTTPS代理（根据HTTP代理端口填写，Clash为7890）
+git config --global http.proxy http://127.0.0.1:7890
+git config --global https.proxy http://127.0.0.1:7890
+```
+
+:::
+
+### 推送
+确认仓库为空，返回到博客目录。Valaxy 已经内置了`.gitignore`文件声明哪些不会被推送，不要修改。请留意远端仓库主分支名称，如果与本地不符，请修改，默认为`main`。
+```bash
+git init
+git remote add origin https://github.com/Chengzi600/Chengzi600.github.io.git
+
+git add -u
+git commit -m "feat: start valaxy project"
+
+git push origin main
+```
+Action 流程将自动执行，完成后，打开 **Settings -> Pages**，选择 `gh-pages` 分支。
+
+如果需要自定义域名，参照 Github Pages 的通用文档设置，然后将`CNAME`文件放置在`public`目录下，并执行提交、推送。
+
+访问`[用户名].github.io`，**Enjoy it** !
+
+## 常见问题
+### Q: 迁移后，截断异常，主页不显示文章预览内容
+规范在截断处添加截断符，不要遗漏`more`前后的空格。
+```md
+
+<!-- more -->
+
+```
+### Q: 文章修改日期异常
+在 frontmatter 添加`updated`字段。
+```
+---
+title: 将博客从 Hexo 迁移到 Valaxy 教程
+tags:
+  - hexo
+  - valaxy
+  - 教程
+categories:
+  - 编程
+  - Web
+date: 2025-07-17 21:00:00
+updated: 2025-07-17 21:00:00 // [!code warning]
+---
+```
+### Q: 文章加密异常
+> Valaxy 还支持部分加密，可查阅[内容加密](https://valaxy.site/guide/config#%E5%86%85%E5%AE%B9%E5%8A%A0%E5%AF%86)
+
+先开启加密功能。
+```ts [site.config.ts]
+import { defineSiteConfig } from 'valaxy'
+
+export default defineSiteConfig({
+  encrypt: {
+    // 开启加密，默认关闭
+    enable: true
+    // algorithm
+    // iv
+    // salt
+  }
+})
+```
+
+替换 frontmatter，删除原来 Hexo 的加密字段，新添加`password`字段即可。
+
+> 更多问题可在评论区反馈  
 > To Be Continued...
 
+## 尾声
 
+至此，搭建和迁移工作全面完成，后续大部分时间只需在`posts`文件夹下写文章，然后重复提交、推送的流程。
 
-
-
+有关扩展组件，如访问计数、自定义页尾、友链、自定义页面等，可以参照文档搭建，也可以在下方评论，我会视情况追加内容的。
