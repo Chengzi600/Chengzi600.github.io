@@ -36,6 +36,7 @@ declare module 'vue-router/auto-routes' {
     '/posts/hexo': RouteRecordInfo<'/posts/hexo', '/posts/hexo', Record<never, never>, Record<never, never>>,
     '/posts/move-to-valaxy': RouteRecordInfo<'/posts/move-to-valaxy', '/posts/move-to-valaxy', Record<never, never>, Record<never, never>>,
     '/posts/test': RouteRecordInfo<'/posts/test', '/posts/test', Record<never, never>, Record<never, never>>,
+    '/posts/tuxun-plugin': RouteRecordInfo<'/posts/tuxun-plugin', '/posts/tuxun-plugin', Record<never, never>, Record<never, never>>,
     '/tags/': RouteRecordInfo<'/tags/', '/tags', Record<never, never>, Record<never, never>>,
   }
 }

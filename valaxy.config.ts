@@ -75,6 +75,11 @@ export default defineValaxyConfig<UserThemeConfig>({
         enable: true,
         icp: '赣ICP备2022003307号',
       },
+      icon: {
+        enable: true,
+        title: '(^_^)',
+        url:'https://blog.zhaozilin.cn/links'
+      }
     },
   },
     addons: [
