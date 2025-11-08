@@ -32,11 +32,15 @@ links:
   blog: Aesrium の树洞
   desc: 一只咸鱼肥宅，兼职学生党
   avatar: https://azusemisa.top/img/avatar.webp
-
+- url: https://rzy.great-site.net/
+  name: 热衷于de博客
+  blog: 热衷于de博客
+  desc: 一个有趣的灵魂
+  avatar: https://rzy.great-site.net/rzy.png
 
 random: true
 date: 2025-07-14 00:00:00
-updated: 2025-07-17 20:00:00
+updated: 2025-11-08 00:00:00
 ---
 
 <YunLinks :links="frontmatter.links" :random="frontmatter.random" errorImg="https://cdn.yunyoujun.cn/img/avatar/none.jpg"/>
