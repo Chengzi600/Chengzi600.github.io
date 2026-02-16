@@ -6,9 +6,12 @@ date: 2025-07-14 00:00:00
 updated: 2026-02-16 00:00:00
 ---
 
-<template #main-content-md>
+<!-- <YunLinks :links="frontmatter.links" :random="frontmatter.random" errorImg="https://cdn.yunyoujun.cn/img/avatar/none.jpg"/> -->
 
-</template>
+<div id="qexo-friends"></div>
+<link rel="stylesheet" href="https://unpkg.com/qexo-friends/friends.css"/>
+<script src="https://registry.npmmirror.com/qexo-static/1.6.0/files/hexo/friends.js"></script>
+<script>loadQexoFriends("qexo-friends", "https://dash.zhaozilin.cn")</script>
 
 ## 友链
 想和博友们交换友链(*^▽^*)
