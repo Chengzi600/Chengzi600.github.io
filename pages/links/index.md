@@ -9,7 +9,7 @@ updated: 2026-02-16 00:00:00
 <template #main-content-md>
   <!-- <YunLinks :links="frontmatter.links" :random="frontmatter.random" errorImg="https://cdn.yunyoujun.cn/img/avatar/none.jpg"/> -->
   <div id="qexo-friends"></div>
-  <LoadQexoFriends />
+  <QexoFriends />
 </template>
 
 ## 友链
