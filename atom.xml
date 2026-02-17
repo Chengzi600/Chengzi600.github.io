@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://blog.zhaozilin.cn/</id>
+    <title>橙の小站</title>
+    <updated>2026-02-17T02:10:52.453Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <author>
+        <name>Chengzi600</name>
+        <email>i@valaxy.site</email>
+        <uri>https://valaxy.site</uri>
+    </author>
+    <link rel="alternate" href="https://blog.zhaozilin.cn/"/>
+    <link rel="self" href="https://blog.zhaozilin.cn/atom.xml"/>
+    <subtitle>靠自己，实际一些ヾ(^∀^)ﾉ</subtitle>
+    <logo>https://thirdqq.qlogo.cn/g?b=sdk&amp;nk=2752718571&amp;s=640</logo>
+    <icon>https://blog.zhaozilin.cn/favicon.svg</icon>
+    <rights>CC BY-NC-SA 4.0 2026 © Chengzi600</rights>
+    <entry>
+        <title type="html"><![CDATA[干掉希沃管家 - 强制关闭冰点还原和卸载集控]]></title>
+        <id>https://blog.zhaozilin.cn/posts/seewo-hugo</id>
+        <link href="https://blog.zhaozilin.cn/posts/seewo-hugo"/>
+        <updated>2025-11-08T16:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>了解希沃集控</h2>
+<p>希沃集控的客户端，即希沃管家，出厂预装在设备上，学校绑定后就能使用。</p>
+<p><a href="https://help.seewo.com/hugo/KlIrj6oEaf">希沃集控</a>是希沃官方的一套设备管理方案，它的功能非常强大，包括但不限于：冰点管理、弹窗拦截、远程控制、窥屏巡视、喊话公告、一键锁屏、画面监测，等等。</p>
+<p>其中使用频率最多，也是最有争议的两个功能，就是冰点还原和弹窗拦截。</p>
+<p>冰点还原开启后，会冻结选定的分区（C盘通常被强制冻结），一切操作会在重启后被还原；弹窗拦截会“AI”自动判定弹窗，使其闪退。</p>
+<p>本文通过强制覆写密码方式，达到解除冰点和卸载管家的目的。</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/seewo-hugo" target="_blank">https://blog.zhaozilin.cn/posts/seewo-hugo</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-11-08T16:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[图寻复盘助手的开发 - 利用浏览器脚本劫持 XHR 请求的基本方法]]></title>
+        <id>https://blog.zhaozilin.cn/posts/tuxun-plugin</id>
+        <link href="https://blog.zhaozilin.cn/posts/tuxun-plugin"/>
+        <updated>2025-07-19T16:00:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p><a href="https://tuxun.fun/">图寻</a>是一款通过现实全景图来猜测位置的娱乐化学习应用。类似于国外的 <a href="https://www.geoguessr.com/">GeoGuessr</a>，你可以通过观察街景进行判断，通过点击地图得分。它使用的街景车全景，主要来自百度、腾讯、谷歌三家提供商。</p>
+<p>本文将制作能够解析来自图寻服务端响应的<strong>图寻复盘助手</strong>，借此探讨使用浏览器扩展或脚本拦截请求（Fetch）的基本方法。从控制台网络抓包起步，到编写自动化解析请求/响应信息的浏览器脚本。</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/tuxun-plugin" target="_blank">https://blog.zhaozilin.cn/posts/tuxun-plugin</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-07-19T16:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[将博客从 Hexo 迁移到 Valaxy 教程]]></title>
+        <id>https://blog.zhaozilin.cn/posts/move-to-valaxy</id>
+        <link href="https://blog.zhaozilin.cn/posts/move-to-valaxy"/>
+        <updated>2025-07-17T21:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>::: tip</p>
+<p>这篇教程同样适合初次建立 Valaxy 博客的朋友。只需跳过有关迁移的步骤即可。安装、配置、上传 Github 等操作都是一致的。</p>
+<p>:::</p>
+<h2>我为什么要迁移</h2>
+<p>在过去的一年里，我的博客一直采用 <a href="https://hexo.io/">Hexo 博客框架</a> + <a href="https://github.com/YunYouJun/hexo-theme-yun">hexo-theme-yun 主题</a> + <a href="https://twikoo.js.org/">Twikoo 评论系统</a> 的架构。我对这个博客最满意的地方就是它的主题，然而，该主题的作者 yunyoujun 着手开发于新的博客框架——基于 Vue 的 Valaxy，因而停止了对 hexo 主题 yun 的维护。主题便是促使我迁移的一大因素。</p>
+<p>此外，当时建博客时比较匆忙，很多系统如 RSS、搜索都没有来得及完善。后来我忙于备战中考，博客也被我暂时搁置了。今年年初寒假也有迁移的想法，但害怕框架还不成熟，就放弃了。现在借此机会，决定将博客整个迁移到 Valaxy。</p>
+<p>如果你对插件生态依赖不大，并且觉得 Valaxy 的一些特性（见<a href="https://valaxy.site/">文档</a>）是你的刚需，那么可以考虑进行迁移。</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/move-to-valaxy" target="_blank">https://blog.zhaozilin.cn/posts/move-to-valaxy</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-07-17T21:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[网站简介]]></title>
+        <id>https://blog.zhaozilin.cn/posts/about-site</id>
+        <link href="https://blog.zhaozilin.cn/posts/about-site"/>
+        <updated>2024-02-25T00:00:00.000Z</updated>
+        <content type="html"><![CDATA[<p>你好呀，我是<a href="https://blog.zhaozilin.cn/about">Chengzi600</a>，坐标江西的一枚高中生</p>
+<p>自己搭了个<a href="https://blog.zhaozilin.cn/about/site">小网站</a>，有空写一些奇奇怪怪的东西<br>
+左上角按钮可以展开边栏，里面有我的Github和B站信息<br>
+点击边栏中的头像可以打开留言板，下面的月亮可以切换暗色/亮色模式<br>
+由于托管网站托管服务器在国外，打开速度有些慢，请谅解</p>
+<p>欢迎随时来看看ヾ(^∀^)ﾉ</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/about-site" target="_blank">https://blog.zhaozilin.cn/posts/about-site</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2025-07-16T21:00:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[英语演讲稿 - My dream]]></title>
+        <id>https://blog.zhaozilin.cn/posts/english-writing-mydeream</id>
+        <link href="https://blog.zhaozilin.cn/posts/english-writing-mydeream"/>
+        <updated>2024-08-14T19:54:00.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>这种垃圾文章应该没人直接原文搬走，我就不强调“仅供学习参考”了</p>
+<p>感谢 <code>ChatGPT 4o</code>对文章提出的修改意见</p>
+</blockquote>
+<p><img src="https://s2.loli.net/2024/08/14/R6MoUhZ18bfIB2G.png" alt="english-chatgpt.png"></p>
+<p>Hello, everyone. First, I'm very happy to be here today to share my dream with you.I have a dream that technology will lead us to a better future.<br>
+    Throughout history, technology has been a symbol of progress. A famous example is the invention of the Internet, which has made it possible to stay connected with others from anywhere in the world.</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/english-writing-mydeream" target="_blank">https://blog.zhaozilin.cn/posts/english-writing-mydeream</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-08-14T19:54:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[恶魔轮盘赌拆包 - Godot 引擎游戏的逆向]]></title>
+        <id>https://blog.zhaozilin.cn/posts/godot</id>
+        <link href="https://blog.zhaozilin.cn/posts/godot"/>
+        <updated>2024-02-24T19:30:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>近期网络上也是出现了一款特别火的游戏——<strong>Buckshot Roulette</strong>，也叫恶魔轮盘赌，游戏玩法不多赘述，这里提供 Godot 引擎游戏逆向的一般方法，至于游戏中AI大哥的逻辑，B站上已经有了分析<a href="https://www.bilibili.com/video/BV13z421R73V"># 逆向代码解析恶魔轮盘赌！你想知道的全在这里</a></p>
+<h2>准备工作</h2>
+<p>游戏是 <strong>Godot</strong> 引擎开发的，Godot 是一个开源引擎，这意味着我们可以很容易地将其反编译，得到项目文件，以此来获得你想要的音频/图片资源，甚至对代码进行二次开发</p>
+<p>这里我们用到 Github 上一个开源项目 [<a href="https://github.com/bruvzg/gdsdecomp">GitHub - bruvzg/gdsdecomp: Godot reverse engineering tools</a>，该程序支持反编译 Godot 4.x、3.x 和 2.x 项目</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/godot" target="_blank">https://blog.zhaozilin.cn/posts/godot</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-24T19:30:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[英语写作 - Spring Festival]]></title>
+        <id>https://blog.zhaozilin.cn/posts/english-writing-spring</id>
+        <link href="https://blog.zhaozilin.cn/posts/english-writing-spring"/>
+        <updated>2024-02-22T20:14:00.000Z</updated>
+        <content type="html"><![CDATA[<blockquote>
+<p>仅供参考，请勿照搬</p>
+</blockquote>
+<p>Do you know what the Spring Festival is? It’s an traditional Chinese festival. We also call it Chinese New Year. Spring Festival falls on the first day of the first lunar month. <em>Throughout</em> thousands of years of history, there have been many customs during the Spring Festival. Do you know any of them? Let's take a look!</p>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/english-writing-spring" target="_blank">https://blog.zhaozilin.cn/posts/english-writing-spring</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-22T20:14:00.000Z</published>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[我如何从零搭建 Hexo Blog 并托管到 Github Pages]]></title>
+        <id>https://blog.zhaozilin.cn/posts/hexo</id>
+        <link href="https://blog.zhaozilin.cn/posts/hexo"/>
+        <updated>2024-02-22T16:02:00.000Z</updated>
+        <content type="html"><![CDATA[<h2>前言</h2>
+<p>之前尝试过自己搭建动态的 BLOG，然而光是域名+服务器的费用就是一个不小的数字。所以这次采用了一个快速、简洁且高效的博客框架 <strong>hexo</strong>，以便于将其免费托管到 Github Pages</p>
+<h2>准备工作</h2>
+<blockquote>
+<p>💻我的搭建环境：Windows 10, Node.js v18.19.0, npm v10.2.3</p>
+</blockquote>
+<ol>
+<li>
+<p>Win 10 电脑建议下载一个终端，Win 11是自带的，如果不想装也可以用Git Bash，但不建议使用CMD或者PowerShell</p>
+</li>
+<li>
+<p>安装 Node.js，安装完了之后在终端输入下面的命令，如果显示出来版本号就说明好了</p>
+</li>
+</ol>
+<br/><p>访问 <a href="https://blog.zhaozilin.cn/posts/hexo" target="_blank">https://blog.zhaozilin.cn/posts/hexo</a> 阅读全文。</p>]]></content>
+        <author>
+            <name>Chengzi600</name>
+            <email>i@valaxy.site</email>
+            <uri>https://valaxy.site</uri>
+        </author>
+        <published>2024-02-22T16:02:00.000Z</published>
+    </entry>
+</feed>
