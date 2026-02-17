@@ -1,53 +1,59 @@
 ---
-title: 互联网上的朋友们
-keywords: 友链
+date: '2025-07-14T00:00:00+08:00'
 description: 友链
-links: 
-- url: "https://www.xscnet.cn/"
-  avatar: "https://www.xscnet.cn/avatar1.jpg"
-  name: "Mete0r's Blog | 壹人小站"
-  blog: "Mete0r's Blog | 壹人小站"
-  desc: "Trust the process."
-  color: "#FFC0CB"
-- url: https://miraii.cn/
-  name: MuXiaoChen🍊
+keywords: 友链
+links:
+- avatar: https://www.xscnet.cn/avatar1.jpg
+  blog: Mete0r's Blog | 壹人小站
+  color: '#FFC0CB'
+  desc: Trust the process.
+  name: Mete0r's Blog | 壹人小站
+  url: https://www.xscnet.cn/
+- avatar: https://tuchuang.voooe.cn/images/2025/04/11/20250400.webp
   blog: MuXiaoChen🍊
-  avatar: https://tuchuang.voooe.cn/images/2025/04/11/20250400.webp
   desc: 柴米油盐酱醋茶，般般都在别人家
-- url: https://justpureh2o.cn
-  avatar: https://img.justpureh2o.cn/image/667f85b1d9c307b7e9ef9f2c.jpg
-  color: "#0080C0"
-  email: justpureh2o@outlook.com
+  name: MuXiaoChen🍊
+  url: https://miraii.cn/
+- avatar: https://img.justpureh2o.cn/image/667f85b1d9c307b7e9ef9f2c.jpg
+  blog: JustPureH2O 的博客
+  color: '#0080C0'
   desc: 穷方圆平直之情，尽规矩准绳之用。
-  name: JustPureH2O 的博客
-  blog: JustPureH2O 的博客
-- url: https://nocp.space
-  name: Norcleeh's Site
-  blog: Norcleeh's Site
+  email: justpureh2o@outlook.com
+  name: JustPureH2O 的博客
+  url: https://justpureh2o.cn
+- avatar: https://nocp.space/static/icon.png
+  blog: Norcleeh's Site
+  color: '#077955'
   desc: 由一条咸鱼搭建的网站
-  avatar: https://nocp.space/static/icon.png
-  color: "#077955"
-- url: https://www.azusemisa.top
-  name: Aesrium の树洞
-  blog: Aesrium の树洞
+  name: Norcleeh's Site
+  url: https://nocp.space
+- avatar: https://azusemisa.top/img/avatar.webp
+  blog: Aesrium の树洞
   desc: 一只咸鱼肥宅，兼职学生党
-  avatar: https://azusemisa.top/img/avatar.webp
-- url: https://zooyoo.top/
-  name: 热衷于de博客
+  name: Aesrium の树洞
+  url: https://www.azusemisa.top
+- avatar: https://zooyoo.top/img/l.png
   blog: 热衷于de博客
   desc: 一个有趣的灵魂
-  avatar: https://zooyoo.top/img/l.png
-
+  name: 热衷于de博客
+  url: https://zooyoo.top/
+- avatar: https://wuxiao.us.kg/assets/pic/icon.png
+  blog: 雾小蒜的小窝
+  desc: 雾小蒜的一个小网页
+  name: 雾小蒜的小窝
+  url: https://wuxiao.us.kg/
 random: true
-date: 2025-07-14 00:00:00
-updated: 2025-11-08 00:00:00
+title: 互联网上的朋友们
+updated: '2026-02-17T10:07:01.295+08:00'
 ---
-
 <YunLinks :links="frontmatter.links" :random="frontmatter.random" errorImg="https://cdn.yunyoujun.cn/img/avatar/none.jpg"/>
 
 ## 友链
+
 想和博友们交换友链(*^▽^*)
+
 ### 我的友链
+
 ```yml
 - url: "https://blog.zhaozilin.cn",
   avatar: "https://thirdqq.qlogo.cn/g?b=sdk&nk=2752718571&s=640",
@@ -57,12 +63,16 @@ updated: 2025-11-08 00:00:00
   email: 2752718571@qq.com
   color: "#ffbf00ff"
 ```
+
 ### 友链格式
+
 可以直接复制你现成的友链，我会帮你排好格式添加哒！
 
 ### 友链要求
-正常访问即可，不做要求。 
+
+正常访问即可，不做要求。
 
 在下方的评论区填写你的友链信息，我看到后会在网站展示你的友链。
 
 不要忘记添加我的友链哦~
+
