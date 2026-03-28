@@ -42,9 +42,19 @@ links:
   desc: 雾小蒜的一个小网页
   name: 雾小蒜的小窝
   url: https://wuxiao.us.kg/
+- avatar: https://blog.damonz.cn/upload/avatar.jpg
+  blog: Damon_ZhangのBlog
+  desc: 于万千星光沉溺
+  name: Damon_ZhangのBlog
+  url: https://blog.damonz.cn/
+- avatar: https://zuanshijia.top/img/favicon.png
+  blog: zuanshijia’s blog
+  desc: 人要成仙，必先疯癫
+  name: zuanshijia’s blog
+  url: https://zuanshijia.top/
 random: true
 title: 互联网上的朋友们
-updated: '2026-02-17T10:07:01.295+08:00'
+updated: '2026-03-28T13:56:55.158+08:00'
 ---
 <YunLinks :links="frontmatter.links" :random="frontmatter.random" errorImg="https://cdn.yunyoujun.cn/img/avatar/none.jpg"/>
 
@@ -75,4 +85,3 @@ updated: '2026-02-17T10:07:01.295+08:00'
 在下方的评论区填写你的友链信息，我看到后会在网站展示你的友链。
 
 不要忘记添加我的友链哦~
-
