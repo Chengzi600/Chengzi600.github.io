@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>舞萌DX猜曲</title>
+    <style>
+        :root {
+            --bg: #f5f7fa;
+            /* 页面背景浅灰 */
+            --card-bg: #ffffff;
+            /* 卡片 */
+            --text: #1e1e1e;
+            /* 主文字 */
+            --text-secondary: #5e5e5e;
+            /* 次要文字 */
+            --accent: #04aaff;
+            /* 强调色 */
+            --secondary: #6c5ce7;
+            /* 次要强调 */
+            --border: #e0e4e8;
+            /* 边框浅 */
+            --success: #2ecc71;
+            /* 成功 */
+            --input-bg: #f9fafc;
+            /* 输入区背景 */
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        /* 卡片通用样式 */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: box-shadow 0.2s ease;
+        }
+
+        /* 标题 */
+        h1 {
+            text-align: center;
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        /* 按钮基础 */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 40px;
+            /* 圆润按钮 */
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #c41e3a;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(230, 57, 70, 0.2);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5541c7;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 12px rgba(108, 92, 231, 0.2);
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            opacity: 0.7;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* 复选框区域 */
+        #difficulty-checkboxes {
+            text-align: left;
+            margin: 20px 0;
+            padding: 16px 20px;
+            background: var(--input-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        #difficulty-checkboxes label {
+            display: block;
+            margin: 10px 0;
+            cursor: pointer;
+            user-select: none;
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        #difficulty-checkboxes input[type="checkbox"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: var(--accent);
+        }
+
+        /* 全选/全不选按钮容器 */
+        #start-screen .btn-secondary {
+            padding: 8px 20px;
+            font-size: 0.9rem;
+        }
+
+        /* 游戏区域 */
+        #game-area {
+            display: none;
+        }
+
+        /* 更新日志按钮悬停效果 */
+        #show-changelog-btn {
+            transition: all 0.2s;
+        }
+
+        #show-changelog-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(108, 92, 231, 0.2);
+        }
+
+        /* 弹窗内列表样式 */
+        #changelog-modal ul li {
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        /* 关闭按钮悬停 */
+        #close-modal-btn:hover {
+            color: var(--accent);
+        }
+
+        /* 曲绘模糊效果 */
+        .jacket-blur {
+            width: 160px;
+            height: 160px;
+            border-radius: 16px;
+            object-fit: cover;
+            filter: blur(15px);
+            transition: filter 0.4s ease;
+            border: none;
+            /* 移除红框 */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 线索列表 */
+        .clue-list {
+            text-align: left;
+            margin: 20px 0;
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .clue-item {
+            background: var(--input-bg);
+            padding: 14px 18px;
+            margin-bottom: 10px;
+            border-radius: 12px;
+            border-left: 5px solid var(--secondary);
+            color: var(--text);
+            font-size: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+            animation: fadeIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* 线索价值颜色（左边框） */
+        .clue-item.high-value {
+            border-left-color: #e63946 !important;
+        }
+
+        /* 红色高价值 */
+        .clue-item.medium-value {
+            border-left-color: #f39c12 !important;
+        }
+
+        /* 橙色中价值 */
+        .clue-item.low-value {
+            border-left-color: #2ecc71 !important;
+        }
+
+        /* 绿色低价值 */
+
+        /* 音频播放按钮 */
+        .play-audio-btn {
+            margin-left: 12px;
+            padding: 6px 14px;
+            background: var(--accent);
+            border: none;
+            border-radius: 30px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 6px rgba(230, 57, 70, 0.2);
+        }
+
+        .play-audio-btn:hover {
+            background: #c41e3a;
+            transform: scale(1.02);
+        }
+
+        /* 输入组 */
+        .input-group {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .guess-input {
+            flex: 1;
+            padding: 14px 18px;
+            border-radius: 40px;
+            border: 1px solid var(--border);
+            background: var(--input-bg);
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: border 0.2s, box-shadow 0.2s;
+        }
+
+        .guess-input:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
+        }
+
+        /* 提示按钮 */
+        #hint-btn {
+            margin-top: 16px;
+            width: 100%;
+            border-radius: 40px;
+            padding: 14px;
+            font-size: 1.1rem;
+        }
+
+        /* 结果区域 */
+        #result-area {
+            display: none;
+        }
+
+        #result-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        #result-content {
+            text-align: left;
+        }
+
+        #result-content h3 {
+            font-size: 1.8rem;
+            margin: 0 0 8px 0;
+            color: var(--text);
+        }
+
+        #result-content p {
+            margin: 8px 0;
+            color: var(--text-secondary);
+        }
+
+        /* 结束页面表格中的谱面分组标题 */
+        #result-content table td[colspan="2"] strong {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* 别名标签 */
+        .alias-tag {
+            background: #e9ecef;
+            color: #2c3e50;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            display: inline-block;
+            font-weight: 500;
+            border: 1px solid var(--border);
+        }
+
+        /* 谱面表格 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            color: var(--accent);
+            /* 标题使用强调色，更醒目 */
+            width: 30%;
+            font-weight: 600;
+            background-color: #f8f9fc;
+            font-family: inherit;
+            /* 保持与页面主体一致 */
+        }
+
+        td {
+            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Cascadia Code', 'Consolas', 'Courier New', monospace;
+            /* 控制台风格等宽字体栈 */
+            color: var(--text);
+            letter-spacing: 0.02em;
+            /* 轻微字间距提升可读性 */
+        }
+
+        /* 加载提示 */
+        .loading {
+            color: var(--text-secondary);
+            text-align: center;
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+
+        /* 动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 600px) {
+            body {
+                padding: 12px;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .jacket-blur {
+                width: 130px;
+                height: 130px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">舞萌DX猜曲</h1>
+
+        <div id="start-screen" class="card">
+            <p>请选择 Master 谱面定数范围：</p>
+
+            <!-- 复选框容器 -->
+            <div id="difficulty-checkboxes">
+                <label style="display: block; margin: 8px 0;">
+                    <input type="checkbox" class="diff-checkbox" value="0-12.9"> 12+及以下
+                </label>
+                <label style="display: block; margin: 8px 0;">
+                    <input type="checkbox" class="diff-checkbox" value="13.0-13.5" checked> 13 (13.0 - 13.5)
+                </label>
+                <label style="display: block; margin: 8px 0;">
+                    <input type="checkbox" class="diff-checkbox" value="13.6-13.9" checked> 13+ (13.6 - 13.9)
+                </label>
+                <label style="display: block; margin: 8px 0;">
+                    <input type="checkbox" class="diff-checkbox" value="14.0-14.5" checked> 14 (14.0 - 14.5)
+                </label>
+                <label style="display: block; margin: 8px 0;">
+                    <input type="checkbox" class="diff-checkbox" value="14.6-15.0" checked> 14+ (14.6 - 14.9)
+                </label>
+            </div>
+
+            <!-- 仅限已游玩曲目复选框 -->
+            <div style="margin: 12px 0; text-align: left;">
+                <label style="cursor: pointer; user-select: none; display: flex; align-items: center;">
+                    <input type="checkbox" id="only-played-songs-checkbox"
+                        style="margin-right: 10px; transform: scale(1.2); accent-color: var(--accent);">
+                    <span style="color: var(--text);">仅限我已游玩的曲目</span>
+                </label>
+                <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 4px 0 0 28px;">
+                    需要填写查分器密钥
+                </p>
+            </div>
+
+            <!-- 全选 / 全不选 按钮 -->
+            <div style="margin-bottom: 15px;">
+                <button type="button" id="select-all-btn" class="btn btn-secondary"
+                    style="padding: 8px 16px; font-size: 0.9rem;">全选</button>
+                <button type="button" id="deselect-all-btn" class="btn btn-secondary"
+                    style="padding: 8px 16px; font-size: 0.9rem;">全不选</button>
+            </div>
+
+            <!-- 开始游戏按钮 -->
+            <button onclick="initGame()" class="btn btn-primary">开始游戏</button>
+
+            <!-- API 密钥输入区 -->
+            <div style="margin: 15px 0; text-align: left;">
+                <label style="display: block; margin-bottom: 6px; color: var(--text);">落雪查分器个人 API 密钥（可选）</label>
+                <div style="display: flex; gap: 8px;">
+                    <input type="password" id="api-token-input" placeholder="输入密钥文本" style="flex: 1; padding: 10px 14px; border-radius: 40px; border: 1px solid var(--border); 
+                      background: var(--input-bg); color: var(--text); font-size: 0.9rem;">
+                    <button id="save-api-token-btn" class="btn btn-secondary"
+                        style="padding: 8px 20px; white-space: nowrap;">
+                        保存
+                    </button>
+                </div>
+                <p style="font-size: 0.75rem; color: var(--text-secondary); margin: 6px 0 0 12px;">
+                    密钥仅保存在本地，用于调用成绩信息。请前往<a href="https://maimai.lxns.net/user/profile?tab=thirdparty" target="_blank"
+                        style="color: var(--accent); text-decoration: none; font-weight: 500;">账号详情-第三方应用</a>选项卡复制。成绩同步请参阅落雪查分器的教程。
+                </p>
+                <!-- 新增：玩家信息反馈区域 -->
+                <div id="api-player-info" style="margin-top: 10px; padding: 10px 14px; background: var(--input-bg); 
+                border-radius: 12px; border-left: 4px solid var(--accent); font-size: 0.9rem; 
+                color: var(--text); display: none;">
+                    <!-- 动态内容会显示在这里 -->
+                </div>
+            </div>
+
+
+
+            <!-- 更新日志按钮（放在卡片底部） -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="show-changelog-btn" class="btn btn-secondary"
+                    style="padding: 8px 20px; font-size: 0.9rem;">📋 关于 & 更新日志</button>
+            </div>
+        </div>
+
+        <!-- 更新日志弹窗 -->
+        <div id="changelog-modal"
+            style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+            <div
+                style="background: var(--card-bg); max-width: 500px; width: 90%; border-radius: 20px; padding: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); border: 1px solid var(--border);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="margin: 0; color: var(--text);">📌 关于项目</h3>
+                    <button id="close-modal-btn"
+                        style="background: none; border: none; font-size: 1.8rem; cursor: pointer; color: var(--text-secondary);">&times;</button>
+                </div>
+                <p
+                    style="text-align: center; font-size: 0.9rem; color: var(--text-secondary); margin-top: 16px; line-height: 1.8;">
+                    💻 开发者：<a href="http://blog.zhaozilin.cn" target="_blank" rel="noopener noreferrer"
+                        style="color: var(--accent); text-decoration: none; font-weight: 500;">Chengzi600</a><br>
+                    📡 数据源：<a href="https://maimai.lxns.net/" target="_blank" rel="noopener noreferrer"
+                        style="color: var(--accent); text-decoration: none; font-weight: 500;">落雪查分器</a><br>
+                    📁 <a href="https://github.com/Chengzi600/Chengzi600.github.io/tree/gh-pages/maimai" target="_blank"
+                        rel="noopener noreferrer"
+                        style="color: var(--accent); text-decoration: none; font-weight: 500;">在 GitHub 上查看源代码</a>
+                </p>
+                <div style="max-height: 400px; overflow-y: auto; padding-right: 8px; color: var(--text);">
+
+                    <h4 style="margin: 0 0 10px 0;">v1.1.3 (2026-04-19)</h4>
+                    <ul style="padding-left: 20px; margin: 0 0 20px 0;">
+                        <li>支持通过填写落雪查分器密钥筛选已游玩歌曲</li>
+                        <li>已游玩歌曲可抽取完成率/fc/fs/游玩时间等信息为线索
+                        <li>新增版本/分类线索</li>
+                        <li>最大线索数提升为6，黄色线索保底提升为3</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 游戏区域 -->
+        <div id="game-area">
+            <div class="card">
+                <div id="clue-image-container" style="margin-bottom: 20px; display: none;">
+                    <img id="clue-jacket" class="jacket-blur" src="" alt="Jacket">
+                </div>
+
+                <div class="clue-list" id="clue-list">
+                    <!-- 线索将显示在这里 -->
+                </div>
+
+                <div class="input-group">
+                    <input type="text" id="guess-input" class="guess-input" placeholder="输入歌名或别名..."
+                        onkeydown="if(event.key==='Enter') submitGuess()">
+                    <button onclick="submitGuess()" class="btn btn-primary">提交</button>
+                </div>
+
+                <button id="hint-btn" onclick="getHint()" class="btn btn-secondary"
+                    style="margin-top: 15px; width: 100%;">获取提示</button>
+            </div>
+        </div>
+
+        <div id="result-area" class="card">
+            <h2 id="result-title"></h2>
+            <div id="result-content"></div>
+            <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 20px;">再玩一局</button>
+        </div>
+
+        <div id="loading-msg" class="loading" style="text-align: center; display: none;">加载中...</div>
+    </div>
+
+    <script>
+        const PERSONAL_API_BASE = 'https://maimai.lxns.net/api/v0/user/maimai';
+        const API_BASE = 'https://maimai.lxns.net/api/v0/maimai';
+        const ASSET_BASE = 'https://assets2.lxns.net/maimai';
+
+        let allSongs = [];
+        let allAliases = [];
+        let filteredSongs = [];
+        let allGenres = [];
+        let allVersions = [];
+
+        let playerScores = [];  // 存储玩家所有成绩
+        let playerApiToken = localStorage.getItem('maimai_api_token') || null;
+
+        let currentSong = null;
+        let currentClues = [];
+        let availableCluePool = []; // 线索池
+        let maxCluesCount = 6;
+        const HIGH_GUARANTEE = 1;            // 高价值线索保底数量
+        const MEDIUM_GUARANTEE = 3;          // 中价值线索保底数量
+        let isGameOver = false;
+
+        let audioContext = null;                   // Web Audio API 上下文
+        let audioBufferCache = new Map();  // 缓存已解码的音频数据，避免重复加载
+
+        // 初始化游戏
+        async function initGame() {
+
+            // 保存复选框状态
+            const diffCheckboxes = document.querySelectorAll('.diff-checkbox');
+            const diffStates = Array.from(diffCheckboxes).map(cb => cb.checked);
+            localStorage.setItem('maimai_diff_checkboxes', JSON.stringify(diffStates));
+
+            const onlyPlayedCheckbox = document.getElementById('only-played-songs-checkbox');
+            if (onlyPlayedCheckbox) {
+                localStorage.setItem('maimai_only_played', onlyPlayedCheckbox.checked);
+            }
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('game-area').style.display = 'block';
+            document.getElementById('loading-msg').style.display = 'block';
+            document.getElementById('select-all-btn').addEventListener('click', () => {
+                document.querySelectorAll('.diff-checkbox').forEach(cb => cb.checked = true);
+            });
+
+
+            // 重置状态
+            currentClues = [];
+            isGameOver = false;
+            document.getElementById('clue-list').innerHTML = '';
+            document.getElementById('clue-image-container').style.display = 'none';
+            document.getElementById('guess-input').value = '';
+            document.getElementById('guess-input').disabled = false;
+
+            const hintBtn = document.getElementById('hint-btn');
+            hintBtn.style.display = 'inline-block';
+            hintBtn.disabled = false;
+            hintBtn.textContent = '获取提示';
+            hintBtn.className = 'btn btn-secondary';
+            hintBtn.onclick = getHint;
+
+            // 加载数据
+            if (allSongs.length === 0) {
+                try {
+                    const [songRes, aliasRes] = await Promise.all([
+                        fetch(`${API_BASE}/song/list`),
+                        //${API_BASE}/song/list?notes=true
+                        fetch(`${API_BASE}/alias/list`)
+                    ]);
+                    const songData = await songRes.json();
+                    const aliasData = await aliasRes.json();
+                    allSongs = songData.songs;
+                    allAliases = aliasData.aliases || [];
+                    allGenres = songData.genres || [];     // 保存分类列表
+                    allVersions = songData.versions || []; // 保存版本列表
+                } catch (e) {
+                    alert('加载曲库失败，请检查网络');
+                    location.reload();
+                    return;
+                }
+            }
+
+            // 筛选歌曲
+            // 获取所有被勾选的区间
+            const checkedBoxes = document.querySelectorAll('.diff-checkbox:checked');
+
+
+            if (checkedBoxes.length === 0) {
+                alert('请至少选择一个定数范围！');
+                return;
+            }
+
+            // 将每个勾选的区间解析为 [min, max] 数组
+            const ranges = Array.from(checkedBoxes).map(cb => {
+                const [minStr, maxStr] = cb.value.split('-');
+                return [parseFloat(minStr), parseFloat(maxStr)];
+            });
+
+            // 按定数过滤歌曲
+            filteredSongs = allSongs.filter(song => {
+                const stdMaster = song.difficulties.standard?.[3];
+                const dxMaster = song.difficulties.dx?.[3];
+                const level = stdMaster?.level_value || dxMaster?.level_value || 0;
+                // 检查是否在任意一个区间内
+                return ranges.some(([min, max]) => level >= min && level <= max);
+            });
+
+
+            // ========== 根据“仅限已游玩曲目”复选框进一步过滤 ==========
+            //const onlyPlayedCheckbox = document.getElementById('only-played-songs-checkbox');
+            if (onlyPlayedCheckbox && onlyPlayedCheckbox.checked) {
+                // 检查是否有成绩数据
+                if (playerScores.length > 0) {
+
+                    //console.log(playerScores)
+                    // 构建玩家已游玩曲目的 ID 集合（去重）
+                    const playedSongIds = new Set(playerScores.map(score => score.id));
+                    const beforeCount = filteredSongs.length;
+                    filteredSongs = filteredSongs.filter(song => playedSongIds.has(song.id));
+                    console.log(`“仅限已游玩”过滤：${beforeCount} → ${filteredSongs.length} 首`);
+
+                    // 如果过滤后没有歌曲，提示并自动取消勾选，同时恢复原筛选结果
+                    if (filteredSongs.length === 0) {
+                        alert('所选定数范围内没有您游玩过的曲目，请扩大定数范围或取消“仅限已游玩”选项。');
+                        onlyPlayedCheckbox.checked = false;
+                        // 重新按定数过滤（不使用已游玩限制）
+                        filteredSongs = allSongs.filter(song => {
+                            const stdMaster = song.difficulties.standard?.[3];
+                            const dxMaster = song.difficulties.dx?.[3];
+                            const level = stdMaster?.level_value || dxMaster?.level_value || 0;
+                            return ranges.some(([min, max]) => level >= min && level <= max);
+                        });
+                    }
+                } else {
+                    // 没有成绩数据时，提示并取消勾选
+                    alert('尚未获取到您的游玩记录，请先填写并保存有效的 API 密钥。');
+                    onlyPlayedCheckbox.checked = false;
+                }
+            }
+
+            // 随机选歌
+            //console.log(filteredSongs)
+            //currentSong = filteredSongs[Math.floor(Math.random() * filteredSongs.length)];
+            
+            const randomIndex = crypto.getRandomValues(new Uint32Array(1))[0] % filteredSongs.length;
+currentSong = filteredSongs[randomIndex];
+            //console.log('符合条件的歌曲数量:', filteredSongs.length, filteredSongs.map(s => s.title));
+
+            availableCluePool = generateCluePool(currentSong);
+
+
+            document.getElementById('loading-msg').style.display = 'none';
+        }
+
+
+        // 生成线索池
+        function generateCluePool(song) {
+            const pool = [];
+            const std = song.difficulties.standard || [];
+            const dx = song.difficulties.dx || [];
+
+            // 基础文本线索
+            pool.push({ type: 'text', content: `BPM: ${song.bpm}`, value: "low" });
+            pool.push({ type: 'text', content: `曲师: ${song.artist}`, value: "medium" });
+
+            // 分类线索
+            if (song.genre) {
+                const genreInfo = allGenres.find(g => g.genre === song.genre);
+                const displayGenre = genreInfo ? genreInfo.title : song.genre;
+                pool.push({
+                    type: 'text',
+                    content: `分类: ${displayGenre}`,
+                    value: 'low'
+                });
+            }
+
+            // 版本线索
+            if (song.version !== undefined && song.version !== null) {
+                // 将小版本号映射到大版本号
+                const majorVersion = Math.floor(song.version / 100) * 100;
+                const versionInfo = allVersions.find(v => v.version == majorVersion);
+                //console.log(allVersions)
+                //console.log(song.version)
+                //console.log(versionInfo)
+                //console.log(majorVersion)
+                if (versionInfo) {
+                    pool.push({
+                        type: 'text',
+                        content: `登场版本: ${versionInfo.title}`,
+                        value: 'low'
+                    });
+                }
+            }
+
+
+            let versionText = '';
+            if (std.length > 0 && dx.length > 0) versionText = '包含标准谱面和 DX 谱面';
+            else if (std.length > 0) versionText = '仅包含标准谱面';
+            else versionText = '仅包含 DX 谱面';
+            pool.push({ type: 'text', content: versionText, value: "low" });
+
+            // Master 谱师线索
+            const stdMasterDesigner = std[3]?.note_designer;
+            const dxMasterDesigner = dx[3]?.note_designer;
+
+            if (stdMasterDesigner) {
+                pool.push({
+                    type: 'text',
+                    content: `标准 MASTER 谱师: ${stdMasterDesigner}`,
+                    value: 'low'
+                });
+            } else if (dxMasterDesigner) {
+                pool.push({
+                    type: 'text',
+                    content: `DX MASTER 谱师: ${dxMasterDesigner}`,
+                    value: 'low'
+                });
+            }
+
+            // 定数线索
+            const masterLevel = std[3]?.level_value || dx[3]?.level_value;
+            if (masterLevel) pool.push({ type: 'text', content: `MASTER 定数: ${masterLevel}`, value: "low" });
+
+            // 别名线索
+            const songAliasObj = allAliases.find(a => a.song_id === song.id);
+
+            // 必须满足：别名数量 >= x
+            if (songAliasObj && songAliasObj.aliases.length >= 2) {
+                const aliases = songAliasObj.aliases;
+                let clueText = '';
+                let excludeFromAnswer = false; // 标记是否需要从答案中排除
+
+                // 筛选出长度 >= 5 的别名
+                const longAliases = aliases.filter(a => a.length >= 5);
+
+                if (longAliases.length > 0) {
+                    // 情况A：有长别名，取靠后的一个（数组最后一个）
+                    clueText = longAliases[longAliases.length - 1];
+                    excludeFromAnswer = true; // 长别名作为线索时，不能作为答案
+                } else {
+                    // 情况B：没有长别名，取列表最后一个，打码
+                    const lastAlias = aliases[aliases.length - 1];
+                    if (lastAlias.length >= 2) {
+                        const first = lastAlias[0];
+                        const last = lastAlias[lastAlias.length - 1];
+                        const middle = '*'.repeat(lastAlias.length - 2);
+                        clueText = `${first}${middle}${last}`;
+                    } else {
+                        clueText = lastAlias; // 只有一个字不打码
+                    }
+                    excludeFromAnswer = false; // 打码线索不影响短别名作为答案
+                }
+
+                pool.push({
+                    type: 'text',
+                    content: `别名线索: ${clueText}`,
+                    isAliasClue: true,
+                    excludeAnswer: excludeFromAnswer,
+                    rawValue: excludeFromAnswer ? clueText : null // 记录被排除的那个长别名
+                    , value: "medium"
+                });
+            }
+
+            // 添加 BREAK 物量线索
+            //const stdMaster = song.difficulties.standard?.[3];
+            //const dxMaster = song.difficulties.dx?.[3];
+            //if (stdMaster && stdMaster.notes && typeof stdMaster.notes.break === 'number') {
+            //     pool.push({
+            //         type: 'text',
+            //         content: `标准 MASTER BREAK 物量: ${stdMaster.notes.break}`,value:"low"
+            //     });
+            // } else if (dxMaster && dxMaster.notes && typeof dxMaster.notes.break === 'number') {
+            //     pool.push({
+            //         type: 'text',
+            //         content: `DX MASTER BREAK 物量: ${dxMaster.notes.break}`,value:"low"
+            //     });
+            // } 
+
+            //音频线索
+            pool.push({
+                type: 'audio',
+                content: '音乐片段线索',
+                value: 'high',
+                audioData: null,
+                songId: song.id
+            });
+
+            // 玩家成绩线索
+            if (playerScores.length > 0) {
+                const songScores = playerScores.filter(s => s.id === song.id);
+                if (songScores.length > 0) {
+                    // 难度索引映射
+                    const diffNames = ['BASIC', 'ADVANCED', 'EXPERT', 'MASTER', 'Re:MASTER'];
+                    // 优先取 Master (level_index === 3)，否则取第一个
+                    let targetScore = songScores.find(s => s.level_index === 3) || songScores[0];
+                    const diffName = diffNames[targetScore.level_index] || 'UNKNOWN';
+                    const prefix = `${diffName} `; // 用于拼接线索前缀
+
+                    // 线索1：完成度（%）
+                    pool.push({
+                        type: 'text',
+                        content: `你的 ${prefix} 谱面达成率: ${targetScore.achievements.toFixed(4)}%`,
+                        value: 'medium'
+                    });
+
+                    // 线索2：FC 状态（若不为 null）
+                    if (targetScore.fc) {
+                        const fcMap = { 'app': 'AP+', 'ap': 'AP', 'fcp': 'FC+', 'fc': 'FC' };
+                        pool.push({
+                            type: 'text',
+                            content: `你的 ${prefix} 谱面 Combo 状态: ${fcMap[targetScore.fc] || targetScore.fc}`,
+                            value: 'medium'
+                        });
+                    }
+
+                    // 线索3：FS 状态（若不为 null 且不为 'sync'）
+                    if (targetScore.fs && targetScore.fs !== 'sync') {
+                        const fsMap = { 'fsdp': 'FDX+', 'fsd': 'FDX', 'fsp': 'FS+', 'fs': 'FS' };
+                        pool.push({
+                            type: 'text',
+                            content: `你的 ${prefix} 谱面 Sync(同步) 状态: ${fsMap[targetScore.fs] || targetScore.fs}`,
+                            value: 'medium'
+                        });
+                    }
+
+                    // 线索4：DX 星级（若 >= 2）
+                    if (targetScore.dx_star && targetScore.dx_star >= 2) {
+                        pool.push({
+                            type: 'text',
+                            content: `你的 ${prefix}DX 星级: ${'⭐'.repeat(targetScore.dx_star)}`,
+                            value: 'medium'
+                        });
+                    }
+
+                    // 线索5：最后游玩时间
+                    if (targetScore.last_played_time) {
+                        const lastPlayed = new Date(targetScore.last_played_time).toLocaleString('zh-CN', { hour12: false });
+                        pool.push({
+                            type: 'text',
+                            content: `你的最后游玩时间: ${lastPlayed}`,
+                            value: 'medium'
+                        });
+                    }
+                }
+            }
+
+            // 曲绘线索
+            pool.push({ type: 'image', content: '曲绘线索已解锁', value: "high" });
+
+
+            return pool;
+
+
+        }
+
+        function getHint() {
+            const btn = document.getElementById('hint-btn');
+
+            const highCount = currentClues.filter(c => c.value === 'high').length;
+            const mediumCount = currentClues.filter(c => c.value === 'medium').length;
+            const remainingDraws = maxCluesCount - currentClues.length;
+
+            const needHigh = Math.max(0, HIGH_GUARANTEE - highCount);
+            const needMedium = Math.max(0, MEDIUM_GUARANTEE - mediumCount);
+
+            let candidatePool = availableCluePool.filter(item => !currentClues.includes(item));
+
+            // 高价值达到上限后排除
+            if (highCount >= HIGH_GUARANTEE) {
+                candidatePool = candidatePool.filter(item => item.value !== 'high');
+            }
+
+            // 前瞻检查：如果本轮不选保底价值，剩余次数是否足够完成保底？
+            // 需要同时满足：剩余次数-1 >= 仍需的高+中数量
+            const afterThisDraw = remainingDraws - 1;
+            if (afterThisDraw < needHigh + needMedium) {
+                // 不够，本轮必须从保底价值中抽取
+                const mustValues = [];
+                if (needHigh > 0) mustValues.push('high');
+                if (needMedium > 0) mustValues.push('medium');
+                candidatePool = candidatePool.filter(item => mustValues.includes(item.value));
+            }
+
+            // 如果过滤后为空，则放宽限制
+            if (candidatePool.length === 0) {
+                candidatePool = availableCluePool.filter(item => {
+                    if (currentClues.includes(item)) return false;
+                    if (item.value === 'high' && highCount >= HIGH_GUARANTEE) return false;
+                    return true;
+                });
+            }
+
+            // 最终兜底
+            if (candidatePool.length === 0) {
+                candidatePool = availableCluePool.filter(item => !currentClues.includes(item));
+            }
+
+            if (candidatePool.length === 0) {
+                if (currentClues.length > 0) showResult(false);
+                return;
+            }
+
+            const randomClue = candidatePool[Math.floor(Math.random() * candidatePool.length)];
+            currentClues.push(randomClue);
+            renderClue(randomClue);
+
+            if (currentClues.length === maxCluesCount) {
+                btn.textContent = '放弃';
+                btn.className = 'btn btn-danger';
+                btn.onclick = () => {
+                    if (confirm("确定要放弃并查看答案吗？")) {
+                        showResult(false);
+                    }
+                };
+            }
+        }
+
+
+        function renderClue(clue) {
+            const list = document.getElementById('clue-list');
+            const item = document.createElement('div');
+            item.className = 'clue-item';
+
+            // 添加价值颜色类
+            if (clue.value === 'high') {
+                item.classList.add('high-value');
+            } else if (clue.value === 'medium') {
+                item.classList.add('medium-value');
+            } else if (clue.value === 'low') {
+                item.classList.add('low-value');
+            }
+
+            if (clue.type === 'image') {
+                // 原有图片逻辑...
+                const imgContainer = document.getElementById('clue-image-container');
+                const img = document.getElementById('clue-jacket');
+                img.src = `${ASSET_BASE}/jacket/${currentSong.id}.png`;
+                img.onerror = () => { img.src = 'https://via.placeholder.com/150?text=No+Image'; };
+                imgContainer.style.display = 'block';
+                item.textContent = clue.content;
+            } else if (clue.type === 'audio') {
+                // 新增音频线索渲染
+                item.innerHTML = `
+            <span>${clue.content}</span>
+            <button class="play-audio-btn" data-song-id="${clue.songId}" 
+                style="margin-left: 12px; padding: 4px 12px; background: var(--accent); 
+                border: none; border-radius: 4px; color: white; cursor: pointer;">
+                播放片段
+            </button>
+        `;
+                // 绑定播放事件（事件委托或直接绑定）
+                const playBtn = item.querySelector('.play-audio-btn');
+                playBtn.addEventListener('click', async (e) => {
+                    e.stopPropagation();
+                    const btn = e.target;
+                    btn.textContent = '加载中...';
+                    btn.disabled = true;
+                    try {
+                        const clip = await getRandomAudioClip(clue.songId);
+                        const ctx = initAudioContext();
+                        const source = ctx.createBufferSource();
+                        source.buffer = clip;
+                        source.connect(ctx.destination);
+                        source.start();
+                        source.onended = () => {
+                            btn.textContent = '播放片段';
+                            btn.disabled = false;
+                        };
+                    } catch (err) {
+                        alert('音频加载失败');
+                        btn.textContent = '播放片段';
+                        btn.disabled = false;
+                    }
+                });
+            } else {
+                item.textContent = clue.content;
+            }
+
+            list.appendChild(item);
+            list.scrollTop = list.scrollHeight;
+        }
+
+        // 提交猜测
+        function submitGuess() {
+            if (isGameOver) return;
+            const input = document.getElementById('guess-input').value.trim();
+            if (!input) return;
+
+            // 1. 构建合法答案列表
+            // 默认答案：歌名
+            let validAnswers = [currentSong.title];
+
+            // 添加所有别名
+            const songAliasObj = allAliases.find(a => a.song_id === currentSong.id);
+            if (songAliasObj) {
+                validAnswers = validAnswers.concat(songAliasObj.aliases);
+            }
+
+            // 2. 检查是否有需要排除的答案 (长别名线索逻辑)
+            // 遍历已展示的线索，看是否有 isAliasClue 且 excludeAnswer 为 true 的
+            for (let clue of currentClues) {
+                if (clue.isAliasClue && clue.excludeAnswer && clue.rawValue) {
+                    // 从答案中移除这个特定的长别名
+                    validAnswers = validAnswers.filter(ans => ans !== clue.rawValue);
+                    console.log(`排除答案: ${clue.rawValue}`);
+                }
+            }
+
+            // 3. 判定
+            const normalizedInput = input.toLowerCase();
+            const normalizedValidAnswers = validAnswers.map(ans => ans.toLowerCase());
+
+            if (normalizedValidAnswers.includes(normalizedInput)) {
+                showResult(true);
+            } else {
+                if (alert(`猜测错误，当前正确答案数量为 ${validAnswers.length}`)) {
+                    // do nothing
+                }
+            }
+        }
+
+        // 初始化音频上下文（用户首次交互时调用）
+        function initAudioContext() {
+            if (!audioContext) {
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            return audioContext;
+        }
+
+        async function fetchAndLogPlayerInfo(token) {
+            try {
+                console.log('正在获取玩家信息...');
+                const response = await fetch(`${PERSONAL_API_BASE}/player`, {
+                    headers: {
+                        'X-User-Token': token,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(`HTTP ${response.status}: ${error.message || '未知错误'}`);
+                }
+
+                const result = await response.json();
+                if (!result.success) {
+                    throw new Error(result.message || '请求失败');
+                }
+
+                const player = result.data;
+                console.log('玩家信息获取成功！');
+                console.log(JSON.stringify(player, null, 2));
+
+                // 保存到全局
+                window.playerInfo = player;
+
+                // 在 fetchAndLogPlayerInfo 的成功处理末尾添加：
+                if (token) {
+                    try {
+                        const scoresResult = await fetch(`${PERSONAL_API_BASE}/player/scores`, {
+                            headers: { 'X-User-Token': token }
+                        });
+                        if (scoresResult.ok) {
+                            const scoresData = await scoresResult.json();
+                            if (scoresData.success) {
+                                playerScores = scoresData.data;
+                                console.log(`✅ 已加载玩家成绩，共 ${playerScores.length} 条`);
+                            }
+                        }
+                    } catch (e) {
+                        console.warn('获取玩家成绩失败，将不提供成绩线索', e);
+                    }
+                }
+
+                // 界面内显示玩家信息
+                const infoDiv = document.getElementById('api-player-info');
+                const uploadTime = player.upload_time
+                    ? new Date(player.upload_time).toLocaleString('zh-CN', { hour12: false })
+                    : '未知';
+
+                infoDiv.style.display = 'block';
+                infoDiv.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <span style="font-weight: 600;">${player.name}</span>
+                <span style="background: var(--secondary); padding: 2px 10px; border-radius: 20px; color: white; font-size: 0.8rem;">Rating ${player.rating}</span>
+            </div>
+            <div style="margin-top: 6px; color: var(--text-secondary); font-size: 0.8rem;">
+                查分器数据同步时间：${uploadTime}
+            </div>
+        `;
+
+
+
+            } catch (error) {
+                console.error('❌ 获取玩家信息失败:', error.message);
+                // 在界面显示错误信息
+                const infoDiv = document.getElementById('api-player-info');
+                infoDiv.style.display = 'block';
+                infoDiv.style.borderLeftColor = '#e74c3c';
+                infoDiv.innerHTML = `
+            <span style="color: #e74c3c;">❌ 获取失败：${error.message}</span>
+        `;
+                // 3秒后隐藏
+                setTimeout(() => {
+                    infoDiv.style.display = 'none';
+                    infoDiv.style.borderLeftColor = 'var(--accent)'; // 恢复原色
+                }, 5000);
+            }
+        }
+
+        // 获取随机2秒音频片段（返回 AudioBuffer 片段）
+        async function getRandomAudioClip(songId) {
+            initAudioContext();
+            const audioUrl = `${ASSET_BASE}/music/${songId}.mp3`;
+
+            // 若已缓存则直接使用
+            let audioBuffer = audioBufferCache.get(songId);
+            if (!audioBuffer) {
+                const response = await fetch(audioUrl);
+                const arrayBuffer = await response.arrayBuffer();
+                audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+                audioBufferCache.set(songId, audioBuffer);
+            }
+
+            const duration = audioBuffer.duration;
+            const sampleRate = audioBuffer.sampleRate;
+            const clipDuration = 2; // 2秒
+
+            // 如果歌曲总时长不足2秒，返回整个音频
+            if (duration <= clipDuration) {
+                return audioBuffer;
+            }
+
+            // 随机起始时间（0 到 duration - 2 之间）
+            const startTime = Math.random() * (duration - clipDuration);
+            const startOffset = Math.floor(startTime * sampleRate);
+            const frameCount = Math.floor(clipDuration * sampleRate);
+
+            // 创建新的 AudioBuffer 存放截取片段
+            const clippedBuffer = audioContext.createBuffer(
+                audioBuffer.numberOfChannels,
+                frameCount,
+                sampleRate
+            );
+
+            for (let channel = 0; channel < audioBuffer.numberOfChannels; channel++) {
+                const channelData = audioBuffer.getChannelData(channel);
+                const clippedData = clippedBuffer.getChannelData(channel);
+                for (let i = 0; i < frameCount; i++) {
+                    clippedData[i] = channelData[startOffset + i];
+                }
+            }
+
+            return clippedBuffer;
+        }
+
+        async function showResult(isWin) {
+            isGameOver = true;
+            document.getElementById('game-area').style.display = 'none';
+            document.getElementById('result-area').style.display = 'block';
+
+            const title = document.getElementById('result-title');
+            const content = document.getElementById('result-content');
+
+            title.textContent = isWin ? '🎉 恭喜哟！' : '正确答案';
+            title.style.color = isWin ? 'var(--success)' : 'var(--accent)';
+
+            const song = currentSong;
+            const std = song.difficulties.standard || [];
+            const dx = song.difficulties.dx || [];
+
+            let html = `<img src="${ASSET_BASE}/jacket/${song.id}.png" style="width: 200px; border-radius: 8px; margin-top: 10px;">`;
+            html += `<h3>${song.title}</h3>`;
+            html += `<p>曲师: ${song.artist} | BPM: ${song.bpm}</p>`;
+
+            // 显示别名
+            const songAliasObj = allAliases.find(a => a.song_id === song.id);
+            if (songAliasObj && songAliasObj.aliases.length > 0) {
+                html += `<div>别名: ${songAliasObj.aliases.map(a => `<span class="alias-tag">${a}</span>`).join('')}</div>`;
+            }
+
+
+            html += `<table><tbody>`;
+            if (std.length > 0) {
+                html += `<tr><td colspan="2"><strong>标准谱面</strong></td></tr>`;
+                for (let i = 0; i < std.length; i++) {
+                    if (std[i]) html += `<tr><td>${['Basic', 'Advanced', 'Expert', 'Master', 'Re:Master'][i]}</td><td>${std[i].level_value} (${std[i].note_designer})</td></tr>`;
+                }
+            }
+            if (dx.length > 0) {
+                html += `<tr><td colspan="2"><strong>DX谱面</strong></td></tr>`;
+                for (let i = 0; i < dx.length; i++) {
+                    if (dx[i]) html += `<tr><td>${['Basic', 'Advanced', 'Expert', 'Master', 'Re:Master'][i]}</td><td>${dx[i].level_value} (${dx[i].note_designer})</td></tr>`;
+                }
+            }
+            html += `</tbody></table>`;
+
+            // 插入玩家成绩信息
+            if (playerScores.length > 0) {
+                const songScores = playerScores.filter(s => s.id === song.id);
+                if (songScores.length > 0) {
+                    // 优先取 Master 难度（level_index === 3），否则取第一个
+                    let targetScore = songScores.find(s => s.level_index === 3) || songScores[0];
+                    const diffNames = ['BASIC', 'ADVANCED', 'EXPERT', 'MASTER', 'Re:MASTER'];
+                    const diffName = diffNames[targetScore.level_index] || 'UNKNOWN';
+
+                    // 格式化 FC/FS
+                    const fcMap = { 'app': 'AP+', 'ap': 'AP', 'fcp': 'FC+', 'fc': 'FC' };
+                    const fsMap = { 'fsdp': 'FDX+', 'fsd': 'FDX', 'fsp': 'FS+', 'fs': 'FS', 'sync': 'SYNC' };
+                    const fcText = targetScore.fc ? fcMap[targetScore.fc] || targetScore.fc : '无';
+                    const fsText = targetScore.fs ? fsMap[targetScore.fs] || targetScore.fs : '无';
+
+                    // 游玩时间格式化
+                    const playTime = targetScore.play_time
+                        ? new Date(targetScore.play_time).toLocaleString('zh-CN', { hour12: false })
+                        : '未知';
+
+                    html += `
+            <div style="margin-top: 24px; padding: 16px; background: var(--input-bg); border-radius: 12px; text-align: left;">
+                <h4 style="margin: 0 0 12px 0; color: var(--accent); display: flex; align-items: center; gap: 8px;">
+                    你的 ${diffName} 谱面成绩
+                </h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px;">
+                    <div><span style="color: var(--text-secondary);">达成率：</span><strong>${targetScore.achievements.toFixed(4)}%</strong></div>
+                    <div><span style="color: var(--text-secondary);">评级：</span><strong>${targetScore.rate?.toUpperCase() || '—'}</strong></div>
+                    <div><span style="color: var(--text-secondary);">DX 分数：</span><strong>${targetScore.dx_score}</strong></div>
+                    <div><span style="color: var(--text-secondary);">DX 星级：</span><strong>${targetScore.dx_star ? '⭐'.repeat(targetScore.dx_star) : '—'}</strong></div>
+                    <div><span style="color: var(--text-secondary);">FC：</span><strong>${fcText}</strong></div>
+                    <div><span style="color: var(--text-secondary);">FS：</span><strong>${fsText}</strong></div>
+                    <div><span style="color: var(--text-secondary);">游玩时间：</span><strong>${playTime}</strong></div>
+                </div>
+            </div>
+        `;
+                }
+            }
+            content.innerHTML = html;
+            if (audioBufferCache.has(song.id)) {
+                try {
+                    const ctx = initAudioContext();
+                    const buffer = audioBufferCache.get(song.id);
+                    const source = ctx.createBufferSource();
+                    source.buffer = buffer;
+                    source.connect(ctx.destination);
+                    source.start();
+                } catch (e) {
+                    console.warn('自动播放完整音频失败:', e);
+                    // 失败不提示，静默处理
+                }
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('select-all-btn').addEventListener('click', () => {
+                document.querySelectorAll('.diff-checkbox').forEach(cb => cb.checked = true);
+            });
+            document.getElementById('deselect-all-btn').addEventListener('click', () => {
+                document.querySelectorAll('.diff-checkbox').forEach(cb => cb.checked = false);
+            });
+
+            // ========== 加载本地复选框状态 ==========
+            const savedDiffStates = localStorage.getItem('maimai_diff_checkboxes');
+            if (savedDiffStates) {
+                try {
+                    const states = JSON.parse(savedDiffStates);
+                    const diffCheckboxes = document.querySelectorAll('.diff-checkbox');
+                    if (diffCheckboxes.length === states.length) {
+                        diffCheckboxes.forEach((cb, index) => {
+                            cb.checked = states[index];
+                        });
+                    }
+                } catch (e) {
+                    console.warn('恢复定数复选框状态失败', e);
+                }
+            }
+
+            const savedOnlyPlayed = localStorage.getItem('maimai_only_played');
+            if (savedOnlyPlayed !== null) {
+                const onlyPlayedCheckbox = document.getElementById('only-played-songs-checkbox');
+                if (onlyPlayedCheckbox) {
+                    onlyPlayedCheckbox.checked = savedOnlyPlayed === 'true';
+                }
+            }
+            // =========================================
+
+            // 弹窗控制 
+            const modal = document.getElementById('changelog-modal');
+            const showBtn = document.getElementById('show-changelog-btn');
+            const closeBtn = document.getElementById('close-modal-btn');
+
+            if (showBtn && modal && closeBtn) {
+                showBtn.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                });
+
+                // 点击遮罩关闭
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                    }
+                });
+
+                // ESC 键关闭
+                window.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                    }
+                });
+                // ========== API 密钥管理 ==========
+                const tokenInput = document.getElementById('api-token-input');
+                const saveBtn = document.getElementById('save-api-token-btn');
+
+                // 加载本地存储的密钥并自动验证一次
+                const savedToken = localStorage.getItem('maimai_api_token');
+                if (savedToken) {
+                    tokenInput.value = savedToken;
+                    fetchAndLogPlayerInfo(savedToken);
+                }
+
+                // 保存按钮点击事件
+                saveBtn.addEventListener('click', async () => {
+                    const token = tokenInput.value.trim();
+                    if (!token) {
+                        alert('请输入 API 密钥');
+                        return;
+                    }
+                    localStorage.setItem('maimai_api_token', token);
+                    await fetchAndLogPlayerInfo(token);
+                });
+
+            }
+        });
+    </script>
+</body>
+
+</html>
