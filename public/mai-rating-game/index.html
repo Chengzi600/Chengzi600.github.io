@@ -20,7 +20,7 @@
     <button id="startBtn">开始游戏</button>
 </div>
 <div class="block hidden" id="gamePanel">
-    <h3>随机线索</h3>
+    <h3>线索列表</h3>
     <div id="loadingTip" style="color:#666;display:none;">加载中，约等待3-5s...</div>
     <div id="clueBox"></div>
     <label for="ratingInput">猜测Rating:</label><input id="ratingInput" placeholder="请输入整数..." type="number">
@@ -255,10 +255,15 @@
         gameData.guessCount += 1;
         updateHint();
         const diff = Math.abs(guessVal - gameData.targetRating);
-        if (diff <= WIN_OFFSET) {
-            tipText.textContent = `回答正确！允许误差±${WIN_OFFSET}`;
+        if (diff === 0) {
+            tipText.textContent = "完全猜对，本局结束！";
             tipText.className = "tip win";
             setTimeout(showResult, 800);
+        } else if (diff <= WIN_OFFSET) {
+            let hint = `已达到通关误差±${WIN_OFFSET}，可继续逼近；也可点击放弃进行结算，见好就收。`;
+            hint += guessVal > gameData.targetRating ? "猜大了" : "猜小了";
+            tipText.textContent = hint;
+            tipText.className = "tip win";
         } else {
             if (gameData.showIndex < gameData.allClues.length - 1) {
                 gameData.showIndex += 1;
