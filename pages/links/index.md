@@ -4,10 +4,10 @@ description: 友链
 keywords: 友链
 links:
 - avatar: https://www.xscnet.cn/avatar1.jpg
-  blog: Mete0r's Blog | 壹人小站
+  blog: Mete0r's Blog | 壹人小站
   color: '#FFC0CB'
-  desc: Trust the process.
-  name: Mete0r's Blog | 壹人小站
+  desc: Trust the process.
+  name: Mete0r's Blog | 壹人小站
   url: https://www.xscnet.cn/
 - avatar: https://tuchuang.voooe.cn/images/2025/04/11/20250400.webp
   blog: MuXiaoChen🍊
@@ -15,22 +15,22 @@ links:
   name: MuXiaoChen🍊
   url: https://miraii.cn/
 - avatar: https://img.justpureh2o.cn/image/667f85b1d9c307b7e9ef9f2c.jpg
-  blog: JustPureH2O 的博客
+  blog: JustPureH2O 的博客
   color: '#0080C0'
   desc: 穷方圆平直之情，尽规矩准绳之用。
   email: justpureh2o@outlook.com
-  name: JustPureH2O 的博客
+  name: JustPureH2O 的博客
   url: https://justpureh2o.cn
 - avatar: https://nocp.space/static/icon.png
-  blog: Norcleeh's Site
+  blog: Norcleeh's Site
   color: '#077955'
   desc: 由一条咸鱼搭建的网站
-  name: Norcleeh's Site
+  name: Norcleeh's Site
   url: https://nocp.space
 - avatar: https://azusemisa.top/img/avatar.webp
-  blog: Aesrium の树洞
+  blog: Aesrium の树洞
   desc: 一只咸鱼肥宅，兼职学生党
-  name: Aesrium の树洞
+  name: Aesrium の树洞
   url: https://www.azusemisa.top
 - avatar: https://zooyoo.top/img/l.png
   blog: 热衷于de博客
@@ -48,18 +48,23 @@ links:
   name: Damon_ZhangのBlog
   url: https://blog.damonz.cn/
 - avatar: https://zuanshijia.top/img/favicon.png
-  blog: zuanshijia’s blog
+  blog: zuanshijia’s blog
   desc: 人要成仙，必先疯癫
-  name: zuanshijia’s blog
+  name: zuanshijia’s blog
   url: https://zuanshijia.top/
 - avatar: http://tengu.l2.ink/wp-content/uploads/2026/07/cropped-Camera_XHS_17834972703201040g00831dq5qmlm0m6g5od3.jpg
   blog: 天狗的博客
   desc: 一个记录生活的博客
   name: 天狗的博客
   url: https://tengu.l2.ink/
+- avatar: https://img.jerry-nis.top/d8703c5c-4c4a-49cc-bd94-3363c9eda2d8.png
+  blog: JerryLife
+  desc: Enjoy life
+  name: JerryLife
+  url: https://jerry-nis.top
 random: true
 title: 互联网上的朋友们
-updated: '2026-07-27T12:27:49.517+08:00'
+updated: '2026-08-01T22:28:08.358+08:00'
 ---
 <YunLinks :links="frontmatter.links" :random="frontmatter.random" errorImg="https://cdn.yunyoujun.cn/img/avatar/none.jpg"/>
 
